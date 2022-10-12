@@ -81,7 +81,7 @@ analytics:
 # Site Author
 author:
   name             : "Hongxin Xiang"
-  avatar           : "images/duck.jpg"
+  avatar           : "duck.jpg"
   bio              : "PhD student in AI for Science"
   location         : "Changsha, China"
   employer         :
