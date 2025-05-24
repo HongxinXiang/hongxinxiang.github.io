@@ -11,8 +11,6 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 {% include_relative includes/intro.md %}
 
-Last update time: *2025.05.25*
-
 {% include_relative includes/news.md %}
 
 {% include_relative includes/publication.md %}
