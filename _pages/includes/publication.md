@@ -38,9 +38,7 @@
 
 **Preprints & Under Submission**
 
-[MaskMol: Knowledge-guided Molecular Image Pre-Training Framework for Activity Cliffs](https://scholar.google.com/citations?view_op=view_citation&hl=zh-CN&user=Wocj2IgAAAAJ&sortby=pubdate&citation_for_view=Wocj2IgAAAAJ:eQOLeE2rZwMC)
-
-
-
 <a href='https://arxiv.org/abs/2505.09262'><img src='https://img.shields.io/badge/Arxiv-2505.09262-A42C25?style=flat&logo=arXiv&logoColor=A42C25'></a> <u>Hongxin Xiang</u>†, Ke Li†, Mingquan Liu, Zhixiang Cheng, Bin Yao, Wenjie Du, Jun Xia, Li Zeng, Xin Jin✉, Xiangxiang Zeng✉, "**EDBench: Large-Scale Electron Density Data for Molecular Modeling**". *arXiv preprint arXiv:2505.09262*. [[pdf](https://arxiv.org/pdf/2505.09262)] [[project page](https://hongxinxiang.github.io/projects/EDBench/)] [[github](https://github.com/HongxinXiang/EDBench)] [[database](https://dataverse.harvard.edu/dataverse/EDBench)]
+
+<a href='https://arxiv.org/abs/2409.12926'><img src='https://img.shields.io/badge/Arxiv-2409.12926-A42C25?style=flat&logo=arXiv&logoColor=A42C25'></a> Zhixiang Cheng†, <u>Hongxin Xiang</u>†, Pengsen Ma, Li Zeng, Xin Jin, Xixi Yang, Jianxin Lin, Yang Deng, Bosheng Song, Xinxin Feng, Changhui Deng, Xiangxiang Zeng, "**MaskMol: Knowledge-guided Molecular Image Pre-Training Framework for Activity Cliffs**". *arXiv preprint arXiv:2409.12926*. [[paper](https://arxiv.org/abs/2409.12926)]
 
