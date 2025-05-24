@@ -17,3 +17,4 @@ If you like the template of this homepage, welcome to star and fork my open-sour
 
 {% include_relative includes/publication.md %}
 
+{% include_relative includes/services.md %}
