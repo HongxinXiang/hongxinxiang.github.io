@@ -3,12 +3,12 @@
     "short_name": "",
     "icons": [
        {
-          "src": "/duck.png",
+          "src": "/duck.jpg",
           "sizes": "192x192",
           "type": "image/png"
        },
        {
-        "src": "/duck.png",
+        "src": "/duck.jpg",
         "sizes": "512x512",
         "type": "image/png"
         }
