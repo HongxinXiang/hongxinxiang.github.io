@@ -6,7 +6,7 @@
 
 **Peer-reviewed Conference**
 
-[![Paper](https://img.shields.io/badge/IJCAI-2025-blue)](TODO) Xuan Lin, Qingrui Liu, <u>Hongxin Xiang</u>✉, Daojian Zeng, Xiangxiang Zeng, "**Enhancing Chemical Reaction and Retrosynthesis Prediction with Large Language Model and Dual-task Learning**". In *Proceedings of the 34th International Joint Conference on Artificial Intelligence*. 2025. [[arXiv](https://arxiv.org/abs/2505.02639)]
+[![Paper](https://img.shields.io/badge/IJCAI-2025-blue)](TODO) Xuan Lin, Qingrui Liu, <u>Hongxin Xiang</u>✉, Daojian Zeng, Xiangxiang Zeng, "**Enhancing Chemical Reaction and Retrosynthesis Prediction with Large Language Model and Dual-task Learning**". In *Proceedings of the 34th International Joint Conference on Artificial Intelligence*. 2025. [[arXiv](https://arxiv.org/abs/2505.02639)] [[github](https://github.com/JacklinGroup/ChemDual)]
 
 [![Paper](https://img.shields.io/badge/IJCAI-2025-blue)](TODO) <u>Hongxin Xiang</u>, Jun Xia, Xin Jin, Wenjie Du, Li Zeng, Xiangxiang Zeng, "**Electron Density-enhanced Molecular Geometry Learning**". In *Proceedings of the 34th International Joint Conference on Artificial Intelligence*. 2025. [[github](https://github.com/HongxinXiang/EDG)]
 
