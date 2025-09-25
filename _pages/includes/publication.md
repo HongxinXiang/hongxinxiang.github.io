@@ -6,9 +6,11 @@
 
 **Peer-reviewed Conference**
 
-[![Paper](https://img.shields.io/badge/IJCAI-2025-blue)](TODO) Xuan Lin, Qingrui Liu, <u>Hongxin Xiang</u>✉, Daojian Zeng, Xiangxiang Zeng, "**Enhancing Chemical Reaction and Retrosynthesis Prediction with Large Language Model and Dual-task Learning**". In *Proceedings of the 34th International Joint Conference on Artificial Intelligence*. 2025. [[arXiv](https://arxiv.org/abs/2505.02639)] [[github](https://github.com/JacklinGroup/ChemDual)]
+[![Paper](https://img.shields.io/badge/NeurIPS-2025-blue)](https://arxiv.org/abs/2409.12926) <u>Hongxin Xiang</u>, Ke Li, Mingquan Liu, Zhixiang Cheng, Bin Yao, Wenjie Du, Jun Xia, Li Zeng, Xin Jin✉, Xiangxiang Zeng✉, "**EDBench: Large-Scale Electron Density Data for Molecular Modeling**". *Advances in Neural Information Processing Systems (NeurIPS) 2025*. [[pdf](https://arxiv.org/pdf/2505.09262)] [[project page](https://hongxinxiang.github.io/projects/EDBench/)] [[github](https://github.com/HongxinXiang/EDBench)] [[database](https://dataverse.harvard.edu/dataverse/EDBench)]
 
-[![Paper](https://img.shields.io/badge/IJCAI-2025-blue)](TODO) <u>Hongxin Xiang</u>, Jun Xia, Xin Jin, Wenjie Du, Li Zeng, Xiangxiang Zeng, "**Electron Density-enhanced Molecular Geometry Learning**". In *Proceedings of the 34th International Joint Conference on Artificial Intelligence*. 2025. [[github](https://github.com/HongxinXiang/EDG)]
+[![Paper](https://img.shields.io/badge/IJCAI-2025-blue)](https://www.ijcai.org/proceedings/2025/840) Xuan Lin, Qingrui Liu, <u>Hongxin Xiang</u>✉, Daojian Zeng, Xiangxiang Zeng, "**Enhancing Chemical Reaction and Retrosynthesis Prediction with Large Language Model and Dual-task Learning**". In *Proceedings of the 34th International Joint Conference on Artificial Intelligence*. 2025. [[arXiv](https://arxiv.org/abs/2505.02639)] [[github](https://github.com/JacklinGroup/ChemDual)]
+
+[![Paper](https://img.shields.io/badge/IJCAI-2025-blue)](https://www.ijcai.org/proceedings/2025/872) <u>Hongxin Xiang</u>, Jun Xia, Xin Jin, Wenjie Du, Li Zeng, Xiangxiang Zeng✉, "**Electron Density-enhanced Molecular Geometry Learning**". In *Proceedings of the 34th International Joint Conference on Artificial Intelligence*. 2025. [[github](https://github.com/HongxinXiang/EDG)]
 
 [![Paper](https://img.shields.io/badge/ICLR-2025-blue)](https://openreview.net/forum?id=SjMtxqdQ73) Jun Xia, Sizhe Liu, Jingbo Zhou, Shaorong Chen, <u>Hongxin Xiang</u>, Zicheng Liu, Yue Liu, Stan Z. Li, "**Bridging the Gap between Database Search and *De Novo* Peptide Sequencing with SearchNovo**". In *Proceedings of The Thirteenth International Conference on Learning Representations*. 2025. [[paper](https://openreview.net/forum?id=SjMtxqdQ73)] [[github](https://github.com/junxia97/SearchNovo)]
 
@@ -19,6 +21,8 @@
 [![Paper](https://img.shields.io/badge/IJCAI-2024-blue)](https://www.ijcai.org/proceedings/2024/675) <u>Hongxin Xiang</u>, Shuting Jin, Jun Xia, Man Zhou, Jianmin Wang, Li Zeng, Xiangxiang Zeng, "**An Image-enhanced Molecular Graph Representation Learning Framework**". In *Proceedings of the 33th International Joint Conference on Artificial Intelligence*. 2024. [[paper](https://www.ijcai.org/proceedings/2024/675)] [[github](https://github.com/HongxinXiang/IEM)] [[Poster](https://github.com/HongxinXiang/IEM/blob/main/assets/poster.pdf)] [[PPT](https://github.com/HongxinXiang/IEM/blob/main/assets/ppt.pdf)]
 
 **Peer-reviewed Journal**
+
+[![Paper](https://img.shields.io/badge/IF-2025-green)](https://www.sciencedirect.com/science/article/pii/S1566253525001356) <u>Hongxin Xiang</u>, Mingquan Liu, Linlin Hou, Shuting Jin, Jianmin Wang, Jun Xia, Wenjie Du, Sisi Yuan, Xiangzheng Fu, Xinyu Yang, Li Zeng, and Lei Xu✉, "**n Image-based Protein-Ligand Binding Representation Learning Framework via Multi-Level Flexible Dynamics Trajectory Pre-training**". *Bioinformatics*, 2025. [[paper](https://doi.org/10.1093/bioinformatics/btaf535)] [[github](https://github.com/HongxinXiang/ImagePLB)]
 
 [![Paper](https://img.shields.io/badge/IF-2025-green)](https://www.sciencedirect.com/science/article/pii/S1566253525001356) Shuting Jin, Xiangrong Liu, Junlin Xu, Sisi Yuan, <u>Hongxin Xiang</u>, Lian Shen, Chunyan Li, Zhangming Niu, Yinhui Jiang, "**Adaptive symmetry-based adversarial perturbation augmentation for molecular graph representations with dual-fusion attention information**". *Information Fusion*, 2025. [[paper](https://www.sciencedirect.com/science/article/pii/S1566253525001356)] [[github](https://github.com/stjin-XMU/GapCL)]
 
@@ -40,5 +44,4 @@
 
 <a href='https://arxiv.org/abs/2505.09262'><img src='https://img.shields.io/badge/Arxiv-2505.09262-A42C25?style=flat&logo=arXiv&logoColor=A42C25'></a> Zhixiang Cheng†, <u>Hongxin Xiang</u>†, Pengsen Ma, Li Zeng, Xin Jin, Xixi Yang, Jianxin Lin, Yang Deng, Bosheng Song, Xinxin Feng, Changhui Deng, Xiangxiang Zeng, "**MaskMol: Knowledge-guided Molecular Image Pre-Training Framework for Activity Cliffs**". *arXiv preprint arXiv:2505.09262*. [[paper](https://arxiv.org/abs/2409.12926)]
 
-<a href='https://arxiv.org/abs/2409.12926'><img src='https://img.shields.io/badge/Arxiv-2409.12926-A42C25?style=flat&logo=arXiv&logoColor=A42C25'></a> <u>Hongxin Xiang</u>†, Ke Li†, Mingquan Liu, Zhixiang Cheng, Bin Yao, Wenjie Du, Jun Xia, Li Zeng, Xin Jin✉, Xiangxiang Zeng✉, "**EDBench: Large-Scale Electron Density Data for Molecular Modeling**". *arXiv preprint arXiv:2409.12926*. [[pdf](https://arxiv.org/pdf/2505.09262)] [[project page](https://hongxinxiang.github.io/projects/EDBench/)] [[github](https://github.com/HongxinXiang/EDBench)] [[database](https://dataverse.harvard.edu/dataverse/EDBench)]
 
