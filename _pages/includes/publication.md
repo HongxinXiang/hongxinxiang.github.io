@@ -22,7 +22,7 @@
 
 **Peer-reviewed Journal**
 
-[![Paper](https://img.shields.io/badge/IF-2025-green)](https://www.sciencedirect.com/science/article/pii/S1566253525001356) <u>Hongxin Xiang</u>, Mingquan Liu, Linlin Hou, Shuting Jin, Jianmin Wang, Jun Xia, Wenjie Du, Sisi Yuan, Xiangzheng Fu, Xinyu Yang, Li Zeng, and Lei Xu✉, "**n Image-based Protein-Ligand Binding Representation Learning Framework via Multi-Level Flexible Dynamics Trajectory Pre-training**". *Bioinformatics*, 2025. [[paper](https://doi.org/10.1093/bioinformatics/btaf535)] [[github](https://github.com/HongxinXiang/ImagePLB)]
+[![Paper](https://img.shields.io/badge/Bioinformatics-2025-green)](https://www.sciencedirect.com/science/article/pii/S1566253525001356) <u>Hongxin Xiang</u>, Mingquan Liu, Linlin Hou, Shuting Jin, Jianmin Wang, Jun Xia, Wenjie Du, Sisi Yuan, Xiangzheng Fu, Xinyu Yang, Li Zeng, and Lei Xu✉, "**n Image-based Protein-Ligand Binding Representation Learning Framework via Multi-Level Flexible Dynamics Trajectory Pre-training**". *Bioinformatics*, 2025. [[paper](https://doi.org/10.1093/bioinformatics/btaf535)] [[github](https://github.com/HongxinXiang/ImagePLB)]
 
 [![Paper](https://img.shields.io/badge/IF-2025-green)](https://www.sciencedirect.com/science/article/pii/S1566253525001356) Shuting Jin, Xiangrong Liu, Junlin Xu, Sisi Yuan, <u>Hongxin Xiang</u>, Lian Shen, Chunyan Li, Zhangming Niu, Yinhui Jiang, "**Adaptive symmetry-based adversarial perturbation augmentation for molecular graph representations with dual-fusion attention information**". *Information Fusion*, 2025. [[paper](https://www.sciencedirect.com/science/article/pii/S1566253525001356)] [[github](https://github.com/stjin-XMU/GapCL)]
 
