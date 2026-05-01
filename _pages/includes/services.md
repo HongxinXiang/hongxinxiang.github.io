@@ -2,9 +2,12 @@
 
 **Conference Reviewer**
 
-- ICLR 2025
-- ACM MM 2025
-- IJCAI 2025
+- ICML 2026
+- ICLR 2025, 2026
+- ACM MM 2025, 2026
+- ACMMM Dataset Track 2026
+- AAAI 2025, 2026
+- IJCAI 2025, 2026
 - ECAI 2025
 
 **Journal Reviewer**

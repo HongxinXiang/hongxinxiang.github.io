@@ -6,6 +6,8 @@
 
 **Peer-reviewed Conference**
 
+[![Paper](https://img.shields.io/badge/ICLR-2026-blue)](https://arxiv.org/abs/2409.12926) Wenjie Du, Jiahui Zhang, Xuqiang Li, Sihan Wang, Zhengyang Zhou, <u>Hongxin Xiang</u>, Jun Xia, Ye Wei, Yang Wang, "**I2Mole: Interaction-aware Invariant Molecular Learning For Generalizable Property Prediction**". In *Proceedings of The Fourteenth International Conference on Learning Representations*. 2026. [[pdf](https://openreview.net/pdf?id=IqwF00TCmf)] [[OpenReview](https://openreview.net/forum?id=IqwF00TCmf&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DICLR.cc%2F2026%2FConference%2FAuthors%23your-submissions))]
+
 [![Paper](https://img.shields.io/badge/NeurIPS-2025-blue)](https://arxiv.org/abs/2409.12926) <u>Hongxin Xiang</u>, Ke Li, Mingquan Liu, Zhixiang Cheng, Bin Yao, Wenjie Du, Jun Xia, Li Zeng, Xin Jin✉, Xiangxiang Zeng✉, "**EDBench: Large-Scale Electron Density Data for Molecular Modeling**". *Advances in Neural Information Processing Systems (NeurIPS) 2025*. [[pdf](https://arxiv.org/pdf/2505.09262)] [[project page](https://hongxinxiang.github.io/projects/EDBench/)] [[github](https://github.com/HongxinXiang/EDBench)] [[database](https://dataverse.harvard.edu/dataverse/EDBench)]
 
 [![Paper](https://img.shields.io/badge/IJCAI-2025-blue)](https://www.ijcai.org/proceedings/2025/840) Xuan Lin, Qingrui Liu, <u>Hongxin Xiang</u>✉, Daojian Zeng, Xiangxiang Zeng, "**Enhancing Chemical Reaction and Retrosynthesis Prediction with Large Language Model and Dual-task Learning**". In *Proceedings of the 34th International Joint Conference on Artificial Intelligence*. 2025. [[arXiv](https://arxiv.org/abs/2505.02639)] [[github](https://github.com/JacklinGroup/ChemDual)]
@@ -22,7 +24,9 @@
 
 **Peer-reviewed Journal**
 
-[![Paper](https://img.shields.io/badge/Bioinformatics-2025-green)](https://www.sciencedirect.com/science/article/pii/S1566253525001356) <u>Hongxin Xiang</u>, Mingquan Liu, Linlin Hou, Shuting Jin, Jianmin Wang, Jun Xia, Wenjie Du, Sisi Yuan, Xiangzheng Fu, Xinyu Yang, Li Zeng, and Lei Xu✉, "**n Image-based Protein-Ligand Binding Representation Learning Framework via Multi-Level Flexible Dynamics Trajectory Pre-training**". *Bioinformatics*, 2025. [[paper](https://doi.org/10.1093/bioinformatics/btaf535)] [[github](https://github.com/HongxinXiang/ImagePLB)]
+[![Paper](https://img.shields.io/badge/JBHI-2026-green)](https://ieeexplore.ieee.org/abstract/document/11417474) Zhixiang Cheng, <u>Hongxin Xiang</u>✉, Mingquan Liu, Li Zeng, Xiangxiang Zeng, Bosheng Song✉, "**ReMol: A Chemical Reaction Knowledge-guided Self-supervised Molecular Image Representation Learning Framework**". *IEEE Journal of Biomedical and Health Informatics*, 2026. [[paper](https://ieeexplore.ieee.org/abstract/document/11417474)] [[github](https://github.com/ZhixiangCheng/ReMol)]
+
+[![Paper](https://img.shields.io/badge/Bioinformatics-2025-green)](https://www.sciencedirect.com/science/article/pii/S1566253525001356) <u>Hongxin Xiang</u>, Mingquan Liu, Linlin Hou, Shuting Jin, Jianmin Wang, Jun Xia, Wenjie Du, Sisi Yuan, Xiangzheng Fu, Xinyu Yang, Li Zeng, and Lei Xu✉, "**An Image-based Protein-Ligand Binding Representation Learning Framework via Multi-Level Flexible Dynamics Trajectory Pre-training**". *Bioinformatics*, 2025. [[paper](https://doi.org/10.1093/bioinformatics/btaf535)] [[github](https://github.com/HongxinXiang/ImagePLB)]
 
 [![Paper](https://img.shields.io/badge/IF-2025-green)](https://www.sciencedirect.com/science/article/pii/S1566253525001356) Shuting Jin, Xiangrong Liu, Junlin Xu, Sisi Yuan, <u>Hongxin Xiang</u>, Lian Shen, Chunyan Li, Zhangming Niu, Yinhui Jiang, "**Adaptive symmetry-based adversarial perturbation augmentation for molecular graph representations with dual-fusion attention information**". *Information Fusion*, 2025. [[paper](https://www.sciencedirect.com/science/article/pii/S1566253525001356)] [[github](https://github.com/stjin-XMU/GapCL)]
 
@@ -34,7 +38,7 @@
 
 [![Paper](https://img.shields.io/badge/BIB-2024-green)](https://academic.oup.com/bib/article/25/5/bbae394/7731658) Linlin Hou†, <u>Hongxin Xiang</u>†, Xiangxiang Zeng, Dongsheng Cao, Li Zeng, Bosheng Song, "**Attribute-guided prototype network for few-shot molecular property prediction**". *Briefings in Bioinformatics*, 2024. [[paper](https://academic.oup.com/bib/article/25/5/bbae394/7731658)] [[github](https://github.com/hou29/few-shot-MPP)]
 
-[![Paper](https://img.shields.io/badge/JBHI-2023-green)](https://ieeexplore.ieee.org/document/10375706) Xiang Zhang, <u>Hongxin Xiang</u>✉, Xixi Yang, Jingxin Dong, Xiangzheng Fu, Xiangxiang Zeng, Haowen Chen✉, Keqin Li, "**Chemical structure-aware molecular image representation learning**". *Dual-View Learning Based on Images and Sequences for Molecular Property Prediction*, 2023. [[paper](https://ieeexplore.ieee.org/document/10375706)] [[github](https://github.com/Mrzhang1999/ISMol)]
+[![Paper](https://img.shields.io/badge/JBHI-2023-green)](https://ieeexplore.ieee.org/document/10375706) Xiang Zhang, <u>Hongxin Xiang</u>✉, Xixi Yang, Jingxin Dong, Xiangzheng Fu, Xiangxiang Zeng, Haowen Chen✉, Keqin Li, "**Dual-View Learning Based on Images and Sequences for Molecular Property Prediction**". *IEEE Journal of Biomedical and Health Informatics*, 2023. [[paper](https://ieeexplore.ieee.org/document/10375706)] [[github](https://github.com/Mrzhang1999/ISMol)]
 
 [![Paper](https://img.shields.io/badge/BIB-2023-green)](https://academic.oup.com/bib/article/24/6/bbad404/7424448) <u>Hongxin Xiang</u>, Shuting Jin, Xiangrong Liu, Xiangxiang Zeng, Li Zeng, "**Chemical structure-aware molecular image representation learning**". *Briefings in Bioinformatics*, 2023. [[paper](https://academic.oup.com/bib/article/24/6/bbad404/7424448)] [[github](https://github.com/HongxinXiang/CGIP)]
 
@@ -43,5 +47,4 @@
 **Preprints & Under Submission**
 
 <a href='https://arxiv.org/abs/2505.09262'><img src='https://img.shields.io/badge/Arxiv-2505.09262-A42C25?style=flat&logo=arXiv&logoColor=A42C25'></a> Zhixiang Cheng†, <u>Hongxin Xiang</u>†, Pengsen Ma, Li Zeng, Xin Jin, Xixi Yang, Jianxin Lin, Yang Deng, Bosheng Song, Xinxin Feng, Changhui Deng, Xiangxiang Zeng, "**MaskMol: Knowledge-guided Molecular Image Pre-Training Framework for Activity Cliffs**". *arXiv preprint arXiv:2505.09262*. [[paper](https://arxiv.org/abs/2409.12926)]
-
 
