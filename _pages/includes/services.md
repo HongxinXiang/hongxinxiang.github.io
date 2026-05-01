@@ -3,6 +3,7 @@
 **Conference Reviewer**
 
 - ICML 2026
+- NeurIPS 2025, 2026
 - ICLR 2025, 2026
 - ACM MM 2025, 2026
 - ACMMM Dataset Track 2026
