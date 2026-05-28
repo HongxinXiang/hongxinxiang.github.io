@@ -1,7 +1,7 @@
 # 🔥 News
 <div style="max-height: 200px; overflow-y: auto;">
   <ul>
-    <li><strong>2026.05.16</strong>: 🎉 Two papers are accepted by <em>KDD 2026</em></li>
+    <li><strong>2026.05.16</strong>: 🎉 Three papers are accepted by <em>KDD 2026</em></li>
     <li><strong>2026.04.30</strong>: 🎉 Two papers are accepted by <em>ICML 2026</em></li>
     <li><strong>2026.04.30</strong>: 🎉 One paper is accepted by <em>IJCAI 2026</em></li>
     <li><strong>2026.04.16</strong>: 🎉 One paper is accepted by <em>BMC Biology</em></li>
