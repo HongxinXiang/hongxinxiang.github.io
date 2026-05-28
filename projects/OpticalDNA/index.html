@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>OpticalDNA | Rethinking Genomic Modeling Through Optical Character Recognition</title>
+  <meta name="title" content="OpticalDNA: Rethinking Genomic Modeling Through Optical Character Recognition">
+  <meta name="description" content="OpticalDNA reframes genomic modeling as OCR-style document understanding, enabling compact visual DNA tokens, region-aware reasoning, and efficient long-context genomic prediction.">
+  <meta name="keywords" content="OpticalDNA, genomic foundation models, OCR, DNA modeling, vision-language models, long-context genomics, visual tokenization, eQTL prediction, rice genomics, document understanding">
+  <meta name="author" content="Hongxin Xiang, Pengsen Ma, Yunkang Cao, Di Yu, Haowen Chen, Xinyu Yang, Xiangxiang Zeng">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hunan University & Yuelushan Laboratory">
+  <meta property="og:title" content="OpticalDNA: Rethinking Genomic Modeling Through Optical Character Recognition">
+  <meta property="og:description" content="A vision-based DNA foundation model that renders genomes as documents and learns OCR-style genomic reasoning for efficient long-context prediction.">
+  <meta property="og:url" content="https://hongxinxiang.github.io/projects/OpticalDNA">
+  <meta property="og:image" content="https://hongxinxiang.github.io/projects/OpticalDNA/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="OpticalDNA project preview">
+  <meta property="article:published_time" content="2026-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Hongxin Xiang">
+  <meta property="article:section" content="Machine Learning">
+  <meta property="article:tag" content="Genomic Foundation Models">
+  <meta property="article:tag" content="Optical Character Recognition">
+  <meta property="article:tag" content="Vision-Language Models">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OpticalDNA: Rethinking Genomic Modeling Through Optical Character Recognition">
+  <meta name="twitter:description" content="OpticalDNA turns DNA into structured visual documents, enabling OCR-style genomic understanding, compact visual tokens, and efficient long-context prediction.">
+  <meta name="twitter:image" content="https://hongxinxiang.github.io/projects/OpticalDNA/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="OpticalDNA project preview">
+
+  <meta name="citation_title" content="Rethinking Genomic Modeling Through Optical Character Recognition">
+  <meta name="citation_author" content="Xiang, Hongxin">
+  <meta name="citation_author" content="Ma, Pengsen">
+  <meta name="citation_author" content="Cao, Yunkang">
+  <meta name="citation_author" content="Yu, Di">
+  <meta name="citation_author" content="Chen, Haowen">
+  <meta name="citation_author" content="Yang, Xinyu">
+  <meta name="citation_author" content="Zeng, Xiangxiang">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="International Conference on Machine Learning">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2602.02014">
+
+  <link rel="canonical" href="https://hongxinxiang.github.io/projects/OpticalDNA">
+  <link rel="icon" type="image/png" href="static/images/icon.png">
+  <link rel="apple-touch-icon" href="static/images/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --accent: #06b6d4;
+      --ink: #0f172a;
+      --muted: #475569;
+      --soft: #f8fafc;
+      --line: #e2e8f0;
+      --card: rgba(255, 255, 255, 0.86);
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: #fff; }
+    a { color: var(--primary); }
+    a:hover { color: var(--primary-dark); }
+    .skip-link { position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    .skip-link:focus { left: 1rem; top: 1rem; width: auto; height: auto; z-index: 9999; padding: .75rem 1rem; background: #fff; border: 1px solid var(--line); border-radius: .75rem; box-shadow: var(--shadow); }
+    .hero-odna { position: relative; overflow: hidden; background: radial-gradient(circle at 20% 10%, rgba(37, 99, 235, .18), transparent 36%), radial-gradient(circle at 85% 8%, rgba(6, 182, 212, .16), transparent 34%), linear-gradient(180deg, #f8fbff 0%, #ffffff 82%); }
+    .hero-odna::before { content: "ACGT ACGT ACGT ACGT ACGT ACGT ACGT ACGT"; position: absolute; inset: 2rem auto auto -4rem; width: 120%; font-weight: 900; letter-spacing: .4rem; color: rgba(37, 99, 235, .045); font-size: clamp(3rem, 10vw, 9rem); white-space: nowrap; pointer-events: none; transform: rotate(-7deg); }
+    .hero-odna .container { position: relative; z-index: 1; }
+    .venue-pill { display: inline-flex; align-items: center; gap: .45rem; padding: .45rem .85rem; border-radius: 999px; color: var(--primary-dark); background: rgba(37, 99, 235, .10); border: 1px solid rgba(37, 99, 235, .18); font-weight: 800; font-size: .92rem; margin-bottom: 1.1rem; }
+    .publication-title { font-weight: 900; letter-spacing: -0.045em; line-height: 1.03; max-width: 980px; margin-inline: auto; }
+    .title-gradient { background: linear-gradient(110deg, #0f172a 0%, #1d4ed8 56%, #0891b2 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-subtitle { max-width: 850px; margin: 1rem auto 0; color: var(--muted); font-size: 1.13rem; line-height: 1.75; }
+    .publication-authors { line-height: 1.7; }
+    .eql-cntrb { color: var(--muted); }
+    .publication-links { margin-top: 1.25rem; }
+    .publication-links .button { transition: transform .18s ease, box-shadow .18s ease; border: 0; }
+    .publication-links .button:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(15, 23, 42, .15); }
+    .button.is-primary-soft { background: var(--primary); color: #fff; }
+    .button.is-primary-soft:hover { background: var(--primary-dark); color: #fff; }
+    .hero-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .9rem; margin: 2rem auto 0; max-width: 900px; }
+    .stat-card, .glass-card, .metric-card, .task-card { background: var(--card); border: 1px solid rgba(226, 232, 240, .90); border-radius: 1.25rem; box-shadow: var(--shadow); }
+    .stat-card { padding: 1.1rem .9rem; text-align: center; backdrop-filter: blur(10px); }
+    .stat-value { display: block; font-size: 1.55rem; font-weight: 900; color: var(--primary-dark); letter-spacing: -.03em; }
+    .stat-label { display: block; color: var(--muted); font-size: .83rem; margin-top: .25rem; }
+    .section { padding: 4.5rem 1.5rem; }
+    .section-heading { max-width: 790px; margin: 0 auto 2rem; text-align: center; }
+    .section-eyebrow { color: var(--primary); font-weight: 900; letter-spacing: .08em; text-transform: uppercase; font-size: .78rem; margin-bottom: .45rem; }
+    .section-heading .title { letter-spacing: -.035em; }
+    .section-heading .subtitle { color: var(--muted); line-height: 1.65; }
+    .teaser-card { padding: 1rem; border-radius: 1.5rem; background: #fff; box-shadow: var(--shadow); border: 1px solid var(--line); }
+    .figure-img { display: block; width: 100%; height: auto; border-radius: 1rem; border: 1px solid var(--line); background: #fff; }
+    .figure-caption { margin-top: .85rem; color: var(--muted); font-size: .98rem; line-height: 1.65; text-align: center; }
+    .figure-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .figure-panel { padding: .85rem; border-radius: 1.2rem; border: 1px solid var(--line); background: #fff; box-shadow: 0 10px 28px rgba(15, 23, 42, .06); }
+    .figure-panel h4 { font-weight: 850; font-size: .98rem; margin-bottom: .55rem; color: #1e293b; }
+    .highlight-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .glass-card { padding: 1.35rem; height: 100%; }
+    .card-icon { display: inline-flex; align-items: center; justify-content: center; width: 2.45rem; height: 2.45rem; border-radius: .85rem; color: #fff; background: linear-gradient(135deg, var(--primary), var(--accent)); margin-bottom: .8rem; }
+    .glass-card h3, .metric-card h3, .task-card h3 { font-weight: 800; font-size: 1.05rem; margin-bottom: .45rem; }
+    .glass-card p, .metric-card p, .task-card p { color: var(--muted); line-height: 1.65; }
+    .soft-section { background: linear-gradient(180deg, #f8fafc 0%, #eef6ff 100%); }
+    .method-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+    .flow-step { position: relative; padding: 1.2rem; border-radius: 1.25rem; background: #fff; border: 1px solid var(--line); box-shadow: 0 12px 32px rgba(15, 23, 42, .07); }
+    .flow-step strong { color: var(--primary-dark); }
+    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -1.05rem; top: 50%; transform: translateY(-50%); color: var(--primary); font-weight: 900; font-size: 1.4rem; }
+    .tasks-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .75rem; margin-top: 1rem; }
+    .task-card { padding: 1rem; box-shadow: none; }
+    .task-card .tag { margin-bottom: .55rem; }
+    .metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .metric-card { padding: 1.25rem; }
+    .metric-card .metric { font-size: 2rem; font-weight: 900; color: var(--primary-dark); letter-spacing: -.05em; }
+    .result-item { padding: 1rem; border-radius: 1.35rem; background: #fff; border: 1px solid var(--line); box-shadow: 0 12px 32px rgba(15, 23, 42, .07); margin-bottom: 1.35rem; }
+    .result-table-card { margin-top: 1.35rem; padding: 1.25rem; border-radius: 1.35rem; background: #fff; border: 1px solid var(--line); box-shadow: 0 12px 32px rgba(15, 23, 42, .07); }
+    .benchmark-card { margin-bottom: 1.35rem; }
+    .result-table-card h3 { font-size: 1.05rem; font-weight: 850; margin-bottom: .35rem; }
+    .result-table-card .table-note { color: var(--muted); font-size: .92rem; line-height: 1.6; margin-bottom: .85rem; }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: .95rem; border: 1px solid var(--line); }
+    .paper-table { width: 100%; min-width: 760px; border-collapse: collapse; background: #fff; font-size: .92rem; }
+    .paper-table th, .paper-table td { padding: .78rem .85rem; border-bottom: 1px solid var(--line); text-align: center; vertical-align: middle; }
+    .paper-table th { background: #f8fafc; color: #1e293b; font-weight: 850; }
+    .paper-table td:first-child, .paper-table th:first-child { text-align: left; font-weight: 750; }
+    .paper-table tr:last-child td { border-bottom: 0; }
+    .best { color: var(--primary-dark); font-weight: 900; }
+    .gain-chip { display: inline-flex; align-items: center; gap: .25rem; padding: .18rem .48rem; margin-left: .32rem; border-radius: 999px; background: rgba(37, 99, 235, .09); color: var(--primary-dark); font-size: .78rem; font-weight: 850; white-space: nowrap; }
+
+    .result-icon { margin-right: .28rem; font-size: .78em; opacity: .9; }
+    .stat-value .result-icon { margin-right: .35rem; font-size: .78em; }
+    .trend-badge { display: inline-flex; align-items: center; gap: .25rem; padding: .22rem .56rem; border-radius: 999px; font-size: .78rem; font-weight: 850; white-space: nowrap; border: 1px solid transparent; }
+    .trend-badge.is-up { background: rgba(22, 163, 74, .10); color: #15803d; border-color: rgba(22, 163, 74, .16); }
+    .trend-badge.is-down { background: rgba(37, 99, 235, .10); color: var(--primary-dark); border-color: rgba(37, 99, 235, .16); }
+    .trend-badge.is-faster { background: rgba(6, 182, 212, .10); color: #0e7490; border-color: rgba(6, 182, 212, .16); }
+    .trend-badge.is-neutral { background: rgba(15, 23, 42, .06); color: #334155; border-color: rgba(15, 23, 42, .10); }
+    .mini-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .7rem; margin: 1rem 0 0; }
+    .mini-metric { padding: .85rem; border: 1px solid var(--line); border-radius: 1rem; background: #f8fafc; }
+    .mini-metric strong { display: block; color: var(--primary-dark); font-size: 1.15rem; letter-spacing: -.03em; }
+    .mini-metric span { display: block; color: var(--muted); font-size: .8rem; line-height: 1.35; margin-top: .25rem; }
+
+    .score-stack { display: inline-flex; flex-direction: column; align-items: center; gap: .38rem; line-height: 1.15; }
+    .score-stack .score-main { color: var(--primary-dark); font-weight: 900; white-space: nowrap; }
+    .gain-chip.is-strong { margin-left: 0; padding: .28rem .62rem; background: linear-gradient(135deg, rgba(37, 99, 235, .13), rgba(6, 182, 212, .13)); border: 1px solid rgba(37, 99, 235, .16); box-shadow: 0 8px 18px rgba(37, 99, 235, .10); font-size: .78rem; }
+    .gain-chip.is-subtle { margin-left: 0; background: rgba(37, 99, 235, .07); color: #1e40af; }
+    .transfer-highlight { margin-top: .95rem; padding: 1rem; border-radius: 1.1rem; background: linear-gradient(135deg, rgba(37, 99, 235, .08), rgba(6, 182, 212, .07)); border: 1px solid rgba(37, 99, 235, .14); }
+    .transfer-highlight-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; margin-top: .65rem; }
+    .transfer-gain-card { padding: .8rem; border-radius: .9rem; background: rgba(255, 255, 255, .78); border: 1px solid rgba(226, 232, 240, .9); }
+    .transfer-gain-card strong { display: block; color: var(--primary-dark); font-size: 1.25rem; font-weight: 900; letter-spacing: -.03em; }
+    .transfer-gain-card span { display: block; color: var(--muted); font-size: .8rem; line-height: 1.35; margin-top: .2rem; }
+
+
+    /* Cross-species transfer: compact single-column showcase. */
+    .transfer-stack { display: grid; gap: .95rem; margin-top: 1rem; }
+    .transfer-figure-card { padding: 1rem; border-radius: 1.2rem; border: 1px solid var(--line); background: #fff; box-shadow: 0 10px 28px rgba(15, 23, 42, .06); text-align: center; }
+    .transfer-figure-card h4, .transfer-table-card h4 { font-weight: 850; font-size: 1rem; margin-bottom: .65rem; color: #1e293b; text-align: left; }
+    .transfer-figure-wrap { max-width: 600px; margin: 0 auto; }
+    .transfer-figure-wrap .figure-img { border-radius: .9rem; }
+    .transfer-figure-card .figure-caption { max-width: 760px; margin-left: auto; margin-right: auto; font-size: .94rem; }
+    .transfer-key-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
+    .transfer-key-card { position: relative; overflow: hidden; padding: .95rem; border-radius: 1rem; border: 1px solid rgba(37, 99, 235, .14); background: linear-gradient(135deg, rgba(37, 99, 235, .08), rgba(6, 182, 212, .06)); }
+    .transfer-key-card::after { content: ""; position: absolute; right: -.8rem; top: -.8rem; width: 4rem; height: 4rem; border-radius: 999px; background: rgba(37, 99, 235, .08); }
+    .transfer-key-card strong { display: block; color: var(--primary-dark); font-size: 1.3rem; line-height: 1.05; font-weight: 900; letter-spacing: -.035em; }
+    .transfer-key-card span { display: block; color: var(--muted); font-size: .8rem; line-height: 1.35; margin-top: .35rem; }
+    .transfer-table-card { padding: 1rem; border-radius: 1.2rem; border: 1px solid var(--line); background: #fff; box-shadow: 0 10px 28px rgba(15, 23, 42, .06); }
+    .transfer-table-card .paper-table { min-width: 700px; }
+    .transfer-table-card .paper-table th, .transfer-table-card .paper-table td { padding: .68rem .72rem; }
+    .transfer-takeaway { padding: 1rem; border-radius: 1.1rem; border: 1px solid rgba(37, 99, 235, .14); background: linear-gradient(135deg, rgba(37, 99, 235, .08), rgba(6, 182, 212, .07)); color: #1e293b; line-height: 1.6; }
+
+    .bibtex-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    pre { border-radius: 1rem; border: 1px solid var(--line); background: #0f172a; color: #e2e8f0; padding: 1.2rem; overflow-x: auto; }
+    .copy-bibtex-btn { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: .55rem .9rem; font-weight: 700; cursor: pointer; }
+    .copy-bibtex-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .footer { background: #0f172a; color: #cbd5e1; }
+    .footer a { color: #bfdbfe; }
+    .scroll-to-top { position: fixed; right: 1rem; bottom: 1rem; width: 2.75rem; height: 2.75rem; border-radius: 999px; border: 0; background: var(--primary); color: #fff; box-shadow: var(--shadow); z-index: 40; cursor: pointer; }
+    @media (max-width: 900px) { .transfer-key-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .transfer-insight { grid-template-columns: 1fr; } .hero-stats, .highlight-grid, .metric-grid, .method-flow, .mini-metrics, .figure-grid { grid-template-columns: 1fr 1fr; } .tasks-grid { grid-template-columns: repeat(2, 1fr); } .flow-step:not(:last-child)::after { display: none; } }
+    @media (max-width: 640px) { .transfer-key-grid, .transfer-insight-side { grid-template-columns: 1fr; } .transfer-highlight-grid { grid-template-columns: 1fr; } .section { padding: 3rem 1rem; } .publication-title { font-size: 2.15rem !important; } .hero-stats, .highlight-grid, .metric-grid, .method-flow, .tasks-grid, .mini-metrics, .figure-grid { grid-template-columns: 1fr; } .bibtex-header { align-items: flex-start; flex-direction: column; } }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Rethinking Genomic Modeling Through Optical Character Recognition",
+    "description": "OpticalDNA is a vision-based framework that reframes genomic modeling as OCR-style document understanding, producing compact reconstructible visual tokens for efficient long-context genomic prediction.",
+    "author": [
+      {"@type": "Person", "name": "Hongxin Xiang", "url": "https://hongxinxiang.github.io", "affiliation": {"@type": "Organization", "name": "Hunan University; Yuelushan Laboratory"}},
+      {"@type": "Person", "name": "Pengsen Ma", "affiliation": {"@type": "Organization", "name": "Hunan University; Yuelushan Laboratory"}},
+      {"@type": "Person", "name": "Yunkang Cao", "url": "https://caoyunkang.github.io/", "affiliation": {"@type": "Organization", "name": "School of Artificial Intelligence and Robotics, Hunan University"}},
+      {"@type": "Person", "name": "Di Yu", "affiliation": {"@type": "Organization", "name": "Hunan University; Yuelushan Laboratory"}},
+      {"@type": "Person", "name": "Haowen Chen", "url": "https://csee.hnu.edu.cn/people/chenhaowen", "affiliation": {"@type": "Organization", "name": "Hunan University; Yuelushan Laboratory"}},
+      {"@type": "Person", "name": "Xinyu Yang", "affiliation": {"@type": "Organization", "name": "Hunan University; Yuelushan Laboratory"}},
+      {"@type": "Person", "name": "Xiangxiang Zeng", "url": "https://scholar.google.com/citations?user=B20HBMIAAAAJ&hl=en", "affiliation": {"@type": "Organization", "name": "Hunan University; Yuelushan Laboratory"}}
+    ],
+    "datePublished": "2026-01-01",
+    "publisher": {"@type": "Organization", "name": "International Conference on Machine Learning"},
+    "url": "https://hongxinxiang.github.io/projects/OpticalDNA",
+    "image": "https://hongxinxiang.github.io/projects/OpticalDNA/static/images/social_preview.png",
+    "keywords": ["OpticalDNA", "genomic foundation model", "optical character recognition", "vision-language model", "long-context genomics", "visual DNA tokens"],
+    "isAccessibleForFree": true,
+    "mainEntity": {"@type": "WebPage", "@id": "https://hongxinxiang.github.io/projects/OpticalDNA"},
+    "sameAs": ["https://openreview.net/forum?id=nggzekChuU", "https://arxiv.org/abs/2602.02014", "https://github.com/HongxinXiang/OpticalDNA"]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown -->
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <!-- TODO: Replace with your lab's related works -->
+        <a href="https://hongxinxiang.github.io/projects/EDBench" class="work-item" target="_blank">
+          <div class="work-info">
+            <!-- TODO: Replace with actual paper title -->
+            <h5>EDBench: Large-Scale Electron Density Data for Molecular Modeling</h5>
+            <!-- TODO: Replace with brief description -->
+            <p>A large-scale electron density dataset for 3.3 million molecules, enabling accurate and efficient machine learning force fields.</p>
+            <!-- TODO: Replace with venue and year -->
+            <span class="work-venue">NeurIPS 2025</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <!-- TODO: Add more related works or remove extra items -->
+        <a href="https://www.ijcai.org/proceedings/2025/872" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Electron Density-enhanced Molecular Geometry Learning</h5>
+            <p>The first method to enhance molecular geometry learning with electron density images via cross-modal distillation.</p>
+            <span class="work-venue">IJCAI 2025</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <a href="https://www.ijcai.org/proceedings/2025/840" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Enhancing Chemical Reaction and Retrosynthesis Prediction with Large Language Model and Dual-task Learning</h5>
+            <p>The first dual-task LLM framework (ChemDual) for enhanced chemical reaction and retrosynthesis prediction through large-scale instruction data and joint optimization.</p>
+            <span class="work-venue">IJCAI 2025</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <a href="https://www.ijcai.org/proceedings/2024/675" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>An Image-enhanced Molecular Graph Representation Learning Framework</h5>
+            <p>The first image-enhanced molecular graph learning framework that leverages multi-view 3D images and knowledge distillation.</p>
+            <span class="work-venue">IJCAI 2024</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <main id="main-content">
+    <section class="hero hero-odna">
+      <div class="hero-body">
+        <div class="container is-max-desktop has-text-centered">
+          <div class="venue-pill"><i class="fas fa-award"></i><span>ICML 2026</span></div>
+          <h1 class="title is-1 publication-title title-gradient">Rethinking Genomic Modeling Through Optical Character Recognition</h1>
+          <p class="hero-subtitle">OpticalDNA turns DNA sequences into structured visual documents and learns OCR-style genomic reasoning, enabling compact, reconstructible visual compression for ultra-long genomic contexts.</p>
+
+          <div class="is-size-5 publication-authors mt-4">
+            <span class="author-block"><a href="https://hongxinxiang.github.io" target="_blank" rel="noopener">Hongxin Xiang</a><sup>*</sup>,</span>
+            <span class="author-block">Pengsen Ma<sup>*</sup>,</span>
+            <span class="author-block"><a href="https://caoyunkang.github.io/" target="_blank" rel="noopener">Yunkang Cao</a>,</span>
+            <span class="author-block">Di Yu,</span>
+            <span class="author-block"><a href="https://csee.hnu.edu.cn/people/chenhaowen" target="_blank" rel="noopener">Haowen Chen</a>,</span>
+            <span class="author-block">Xinyu Yang<sup>†</sup>,</span>
+            <span class="author-block"><a href="https://scholar.google.com/citations?user=B20HBMIAAAAJ&amp;hl=en" target="_blank" rel="noopener">Xiangxiang Zeng</a><sup>†</sup></span>
+          </div>
+          <div class="is-size-5 publication-authors mt-2">
+            <span class="author-block">Hunan University &amp; Yuelushan Laboratory</span>
+            <span class="eql-cntrb"><small><br><sup>*</sup>Equal contribution, <sup>†</sup>Co-corresponding authors · <a href="mailto:yangxinyu621@foxmail.com">yangxinyu621@foxmail.com</a>, <a href="mailto:xzeng@hnu.edu.cn">xzeng@hnu.edu.cn</a></small></span>
+          </div>
+
+          <div class="publication-links">
+            <span class="link-block"><a href="https://openreview.net/forum?id=nggzekChuU" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-comments"></i></span><span>OpenReview</span></a></span>
+            <span class="link-block"><a href="https://arxiv.org/pdf/2602.02014" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-primary-soft"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span></a></span>
+            <span class="link-block"><a href="https://github.com/HongxinXiang/OpticalDNA" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a></span>
+            <span class="link-block"><a href="https://arxiv.org/abs/2602.02014" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a></span>
+            <span class="link-block"><a href="#BibTeX" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-quote-right"></i></span><span>BibTeX</span></a></span>
+          </div>
+
+          <div class="hero-stats" aria-label="OpticalDNA key numbers">
+            <div class="stat-card"><span class="stat-value"><i class="fas fa-arrow-down result-icon" aria-hidden="true"></i>20×</span><span class="stat-label">fewer effective tokens on 450k-base tasks</span></div>
+            <div class="stat-card"><span class="stat-value"><i class="fas fa-arrow-down result-icon" aria-hidden="true"></i>985×</span><span class="stat-label">fewer activated parameters than large baselines</span></div>
+            <div class="stat-card"><span class="stat-value"><i class="fas fa-arrow-up result-icon" aria-hidden="true"></i>0.867</span><span class="stat-label">average AUROC on DNALONGBench with MLP head</span></div>
+            <div class="stat-card"><span class="stat-value"><i class="fas fa-bolt result-icon" aria-hidden="true"></i>12.3 min</span><span class="stat-label">rice whole-genome inference time</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="teaser-card">
+          <img src="static/images/motivation.png" alt="From sequential reading to selective genomic scanning" loading="eager" class="figure-img">
+          <p class="figure-caption"><strong>From sequential reading to selective genomic scanning.</strong> OpticalDNA treats DNA as a visual document, enabling region-aware processing and compact, reconstructible visual tokens instead of exhaustive base-by-base reading.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft-section" id="overview">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <div class="section-eyebrow">Core idea</div>
+          <h2 class="title is-3">Genomes are not just sentences. They can be read as documents.</h2>
+          <p class="subtitle">Sequential models spend computation scanning long low-information backgrounds. OpticalDNA converts genomic sequences into coordinate-indexed pages, making genomic reading, grounding, retrieval, and completion natural document-understanding tasks.</p>
+        </div>
+        <div class="highlight-grid">
+          <article class="glass-card"><div class="card-icon"><i class="fas fa-eye"></i></div><h3>Visual DNA representation</h3><p>DNA is rendered into structured multi-page images with nucleotide-level bounding boxes, linking one-dimensional genome coordinates to two-dimensional visual regions.</p></article>
+          <article class="glass-card"><div class="card-icon"><i class="fas fa-compress-arrows-alt"></i></div><h3>Understanding-driven compression</h3><p>A visual encoder produces compact, reconstructible tokens that preserve fine-grained sequence information while reducing the effective token budget for long inputs.</p></article>
+          <article class="glass-card"><div class="card-icon"><i class="fas fa-map-marker-alt"></i></div><h3>Region-aware reasoning</h3><p>OCR-style supervision supports explicit localization, subsequence retrieval, ROI transcription, and masked-region completion through prompt-conditioned genomic tasks.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="method">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <div class="section-eyebrow">Method</div>
+          <h2 class="title is-3">OpticalDNA pipeline</h2>
+          <p class="subtitle">The method reframes genomic modeling as OCR-style document understanding: render, prompt, encode, decode, and reuse the learned visual DNA encoder for downstream prediction.</p>
+        </div>
+        <img src="static/images/method.png" alt="Overview of OpticalDNA" loading="lazy" class="figure-img">
+        <p class="figure-caption"><strong>Overview of OpticalDNA.</strong> (a) Render a 1D genomic sequence into a multi-page DNA document with bounding-box annotations. (b) Construct six OCR-style prompted genomic tasks. (c) Pretrain a visual encoder–document decoder under prompt supervision.</p>
+        <div class="method-flow">
+          <div class="flow-step"><strong>1. Render</strong><br>Convert DNA sequences into fixed-resolution pages with base-level coordinate annotations.</div>
+          <div class="flow-step"><strong>2. Learn</strong><br>Train an OCR-capable vision-language model on reading, grounding, retrieval, and completion prompts.</div>
+          <div class="flow-step"><strong>3. Transfer</strong><br>Reuse the compact visual DNA encoder with lightweight heads for long-range genomic prediction.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft-section" id="tasks">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <div class="section-eyebrow">Pretraining tasks</div>
+          <h2 class="title is-3">Six OCR-inspired genomic primitives</h2>
+        </div>
+        <div class="tasks-grid">
+          <article class="task-card"><span class="tag is-link is-light">T1</span><h3>Reading</h3><p>Free-form DNA transcription from rendered pages.</p></article>
+          <article class="task-card"><span class="tag is-link is-light">T2</span><h3>Grounded reading</h3><p>Transcribe DNA and locate each line or block.</p></article>
+          <article class="task-card"><span class="tag is-link is-light">T3</span><h3>ROI transcription</h3><p>Read DNA text inside user-provided boxes.</p></article>
+          <article class="task-card"><span class="tag is-link is-light">T4</span><h3>Completion</h3><p>Recover masked DNA regions from visual context.</p></article>
+          <article class="task-card"><span class="tag is-link is-light">T5</span><h3>Retrieval</h3><p>Find all occurrences of a query subsequence.</p></article>
+          <article class="task-card"><span class="tag is-link is-light">T6</span><h3>Recognition</h3><p>Predict chromosome-level document labels.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <div class="section-eyebrow">Results</div>
+          <h2 class="title is-3">Strong accuracy, efficiency, and interpretability</h2>
+          <p class="subtitle">OpticalDNA is evaluated from canonical long-range regulatory modeling to cross-subspecies generalization and whole-genome phenotype prediction.</p>
+        </div>
+        <div class="metric-grid">
+          <article class="metric-card"><div class="metric">256K <span class="trend-badge is-down"><i class="fas fa-arrow-down" aria-hidden="true"></i>30× fewer</span></div><h3>Parameter-efficient adaptation</h3><p>Linear probing reaches 0.852 average AUROC using only 256K trainable parameters, outperforming JanusDNA-MLP while requiring far fewer task-specific parameters.</p></article>
+          <article class="metric-card"><div class="metric">0.858 <span class="trend-badge is-up"><i class="fas fa-arrow-up" aria-hidden="true"></i>robust</span></div><h3>Layout robustness</h3><p>Rendering perturbations do not break the visual formulation: wide+dense rendering reaches 0.858 AUROC on AS eQTL, above the original 0.813 layout.</p></article>
+          <article class="metric-card"><div class="metric">0.595/0.745 <span class="trend-badge is-up"><i class="fas fa-arrow-up" aria-hidden="true"></i>transfer</span></div><h3>Cross-species transfer</h3><p>The HG38-pretrained OpticalDNA transfers strongly to rice, approaching the rice-pretrained model and clearly surpassing HG38-pretrained sequence baselines.</p></article>
+        </div>
+
+        <div class="result-table-card mt-5 benchmark-card">
+            <h3>DNALONGBench summary: accuracy with lightweight adaptation</h3>
+            <p class="table-note"><strong>DNALONGBench.</strong> OpticalDNA achieves the best average AUROC on eQTL tasks while using a lightweight probing setup. Relative to JanusDNA-MLP, OpticalDNA-MLP improves the average AUROC by <strong>+3.2%</strong>; relative to JanusDNA without mid-attention, it improves by <strong>+9.6%</strong>. Average AUROC is computed over nine GTEx eQTL tissues.</p>
+            <div class="table-scroll">
+              <table class="paper-table">
+                <thead><tr><th>Model</th><th>Average AUROC ↑</th><th>Trainable params</th><th>Relative note</th></tr></thead>
+                <tbody>
+                <tr><td>JanusDNA w/o mid-Attn</td><td>0.791</td><td>7.662M</td><td>—</td></tr>
+                <tr><td>JanusDNA-MLP w/o mid-Attn</td><td>0.840</td><td>7.745M</td><td>strongest JanusDNA baseline</td></tr>
+                <tr><td>OpticalDNA Linear Probing</td><td>0.852</td><td>256K</td><td><span class="trend-badge is-up"><i class="fas fa-arrow-up" aria-hidden="true"></i>+1.4%</span> vs. JanusDNA-MLP</td></tr>
+                <tr><td>OpticalDNA MLP</td><td class="best">0.867</td><td>1.3M–2.3M</td><td><span class="trend-badge is-up"><i class="fas fa-arrow-up" aria-hidden="true"></i>+3.2%</span> vs. JanusDNA-MLP</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        <div class="result-table-card benchmark-card">
+            <h3>RiceSubBench: in-domain to far-OOD generalization</h3>
+            <p class="table-note"><strong>RiceSubBench.</strong> OpticalDNA generalizes from in-domain japonica to near-, mid-, and far-OOD rice subspecies, with especially clear accuracy gains on rufipogon, barthii, and glaberrima. Accuracy / AUROC are shown below. Percentage badges report relative gains over the strongest non-OpticalDNA baseline for each metric; for glaberrima AUROC, OpticalDNA is slightly below LucaOne but still improves over Evo-2. OpticalDNA uses 409M parameters, compared with 7B for Evo-2 and 1.8B for LucaOne.</p>
+            <div class="table-scroll">
+              <table class="paper-table">
+                <thead><tr><th>Model</th><th>japonica<br>In-domain</th><th>aus<br>Near-OOD</th><th>rufipogon<br>Mid-OOD</th><th>barthii<br>Far-OOD</th><th>glaberrima<br>Far-OOD</th></tr></thead>
+                <tbody>
+                <tr><td>Evo-2 (7B)</td><td>0.486 / 0.700</td><td>0.509 / 0.714</td><td>0.500 / 0.714</td><td>0.532 / 0.725</td><td>0.489 / 0.705</td></tr>
+                <tr><td>LucaOne (1.8B)</td><td>0.510 / 0.703</td><td>0.551 / 0.723</td><td>0.589 / 0.760</td><td>0.556 / 0.745</td><td>0.526 / 0.736</td></tr>
+                <tr><td>OpticalDNA (409M)</td>
+                  <td class="best"><span class="score-stack"><span class="score-main">0.590 / 0.739</span><span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+15.7% Acc</span><span class="gain-chip is-subtle"><i class="fas fa-arrow-up" aria-hidden="true"></i>+5.1% AUROC</span></span></td>
+                  <td class="best"><span class="score-stack"><span class="score-main">0.556 / 0.725</span><span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+0.9% Acc</span><span class="gain-chip is-subtle"><i class="fas fa-arrow-up" aria-hidden="true"></i>+0.3% AUROC</span></span></td>
+                  <td class="best"><span class="score-stack"><span class="score-main">0.639 / 0.762</span><span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+8.5% Acc</span><span class="gain-chip is-subtle"><i class="fas fa-arrow-up" aria-hidden="true"></i>+0.3% AUROC</span></span></td>
+                  <td class="best"><span class="score-stack"><span class="score-main">0.608 / 0.747</span><span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+9.4% Acc</span><span class="gain-chip is-subtle"><i class="fas fa-arrow-up" aria-hidden="true"></i>+0.3% AUROC</span></span></td>
+                  <td class="best"><span class="score-stack"><span class="score-main">0.599 / 0.731</span><span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+13.9% Acc</span><span class="gain-chip is-subtle"><i class="fas fa-arrow-up" aria-hidden="true"></i>+3.7% AUROC vs. Evo-2</span></span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mini-metrics">
+              <div class="mini-metric"><strong><i class="fas fa-arrow-up result-icon" aria-hidden="true"></i>Best accuracy</strong><span>on all 5 splits</span></div>
+              <div class="mini-metric"><strong><i class="fas fa-arrow-up result-icon" aria-hidden="true"></i>Best AUROC</strong><span>on 4 of 5 splits</span></div>
+              <div class="mini-metric"><strong><i class="fas fa-arrow-up result-icon" aria-hidden="true"></i>+13.9%</strong><span>accuracy gain on glaberrima vs. LucaOne</span></div>
+              <div class="mini-metric"><strong><i class="fas fa-arrow-down result-icon" aria-hidden="true"></i>17.1×</strong><span>fewer parameters than Evo-2</span></div>
+            </div>
+          </div>
+
+        <div class="result-table-card benchmark-card">
+          <h3>RiceWGPB: whole-genome phenotype prediction</h3>
+          <p class="table-note">RMSE and inference time under ~400M-base rice genome inputs. The original paper reports OpticalDNA inference time as 12.3 minutes.</p>
+          <div class="table-scroll">
+            <table class="paper-table">
+              <thead><tr><th>Model</th><th>TGW RMSE ↓</th><th>LRI-15SZ RMSE ↓</th><th>Inference time ↓</th><th>Speed note</th></tr></thead>
+              <tbody>
+                <tr><td>Evo-2 (7B)</td><td>3.056</td><td>9.617</td><td>5h 40m</td><td>OpticalDNA is <span class="trend-badge is-faster"><i class="fas fa-bolt" aria-hidden="true"></i>27.6× faster</span></td></tr>
+                <tr><td>LucaOne (1.8B)</td><td>8.817</td><td>9.740</td><td>32.5 min</td><td>OpticalDNA is <span class="trend-badge is-faster"><i class="fas fa-bolt" aria-hidden="true"></i>2.6× faster</span></td></tr>
+                <tr><td>OpticalDNA (409M)</td><td class="best"><span class="score-stack"><span class="score-main">2.952</span><span class="trend-badge is-down"><i class="fas fa-arrow-down" aria-hidden="true"></i>best</span></span></td><td class="best"><span class="score-stack"><span class="score-main">9.531</span><span class="trend-badge is-down"><i class="fas fa-arrow-down" aria-hidden="true"></i>best</span></span></td><td class="best"><span class="score-stack"><span class="score-main">12.3 min</span><span class="trend-badge is-faster"><i class="fas fa-bolt" aria-hidden="true"></i>fastest</span></span></td><td>best RMSE on both traits</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="result-item">
+          <img src="static/images/compare3.png" alt="Grad-CAM visualization for OpticalDNA" loading="lazy" class="figure-img">
+          <p class="figure-caption"><strong>Interpretability.</strong> Grad-CAM highlights region-level attributions and biologically meaningful splice signals, showing that OpticalDNA can localize relevant genomic evidence.</p>
+        </div>
+
+        <div class="result-table-card benchmark-card">
+          <h3>Visual compression remains stable across rendering resolutions</h3>
+          <p class="table-note">Average AUROC on nine eQTL tasks changes minimally while the visual-token compression ratio increases.</p>
+          <div class="table-scroll">
+            <table class="paper-table">
+              <thead><tr><th>Resolution</th><th>#Pages</th><th>#Tokens / page</th><th>Compression ratio</th><th>Average AUROC ↑</th></tr></thead>
+              <tbody>
+                <tr><td>512</td><td>370</td><td>64</td><td>19.0</td><td>0.849</td></tr>
+                <tr><td>640</td><td>226</td><td>100</td><td>19.9</td><td class="best"><span class="score-stack"><span class="score-main">0.852</span><span class="trend-badge is-up"><i class="fas fa-arrow-up" aria-hidden="true"></i>best</span></span></td></tr>
+                <tr><td>1024</td><td>84</td><td>256</td><td>20.9</td><td>0.851</td></tr>
+                <tr><td>1280</td><td>53</td><td>400</td><td>21.2</td><td>0.849</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <div class="result-table-card benchmark-card" id="rendering-robustness">
+          <h3>Rendering Robustness: OpticalDNA is not tied to a single visual layout</h3>
+          <p class="table-note"><strong>Key finding.</strong> OpticalDNA remains robust under realistic rendering perturbations, including text density, aspect ratio, starting position, and font changes. Dense and wide+dense layouts even improve over the original AS eQTL AUROC, suggesting that the OCR-style formulation captures genomic content rather than overfitting to a brittle page style.</p>
+          <div class="mini-metrics">
+            <div class="mini-metric"><strong><i class="fas fa-arrow-up result-icon" aria-hidden="true"></i>0.858</strong><span>best AUROC under wide+dense rendering</span></div>
+            <div class="mini-metric"><strong><i class="fas fa-check result-icon" aria-hidden="true"></i>0.839 / 0.835</strong><span>robust under sans / serif font changes</span></div>
+            <div class="mini-metric"><strong><i class="fas fa-check result-icon" aria-hidden="true"></i>0.812–0.828</strong><span>stable under moderate downsampling</span></div>
+            <div class="mini-metric"><strong><i class="fas fa-arrow-down result-icon" aria-hidden="true"></i>Fixed windows</strong><span>main degradation source, due to artificial fragment boundaries</span></div>
+          </div>
+          <div class="figure-grid">
+            <div class="figure-panel">
+              <h4>Rendering perturbations</h4>
+              <img src="static/images/rendering_robustness.png" alt="Rendering robustness on the Adipose Subcutaneous eQTL task" loading="lazy" class="figure-img">
+              <p class="figure-caption"><strong>Figure 5.</strong> Common formatting changes preserve performance; wide+dense and font-variant renderings outperform the original layout, while rigid fixed-window layouts degrade performance.</p>
+            </div>
+            <div class="figure-panel">
+              <h4>Low-resolution robustness</h4>
+              <img src="static/images/low_resolution_robustness.png" alt="Low-resolution robustness on the Adipose Subcutaneous eQTL task" loading="lazy" class="figure-img">
+              <p class="figure-caption"><strong>Figure 6.</strong> OpticalDNA remains stable under moderate downsampling and degrades mainly at extreme low resolution, supporting the robustness of visual DNA tokens.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-table-card benchmark-card" id="cross-species-transfer">
+          <h3>Cross-Species Transfer: visual genomic representations generalize beyond pretraining species</h3>
+          <p class="table-note"><strong>Key finding.</strong> HG38-pretrained OpticalDNA transfers to rice far better than HG38-pretrained sequence baselines and nearly matches rice-pretrained OpticalDNA, indicating that the gain comes from a transferable OCR-style visual genomic representation rather than only domain-matched pretraining.</p>
+
+          <div class="transfer-stack">
+            <div class="transfer-figure-card">
+              <h4>HG38 → rice transfer</h4>
+              <div class="transfer-figure-wrap">
+                <img src="static/images/cross_species_transfer.png" alt="Cross-species transfer from HG38 to rice" loading="lazy" class="figure-img">
+              </div>
+              <p class="figure-caption"><strong>Figure 7.</strong> OpticalDNA-HG38 clearly surpasses HG38-pretrained sequence baselines and approaches the rice-pretrained OpticalDNA model.</p>
+            </div>
+
+            <div class="transfer-key-grid" aria-label="Cross-species transfer key gains">
+              <div class="transfer-key-card"><strong><i class="fas fa-arrow-up result-icon" aria-hidden="true"></i>+24.7%</strong><span>Accuracy gain over JanusDNA-HG38</span></div>
+              <div class="transfer-key-card"><strong><i class="fas fa-arrow-up result-icon" aria-hidden="true"></i>+10.7%</strong><span>AUROC gain over JanusDNA-HG38</span></div>
+              <div class="transfer-key-card"><strong><i class="fas fa-arrow-up result-icon" aria-hidden="true"></i>+32.5%</strong><span>Accuracy gain over Caduceus-HG38</span></div>
+              <div class="transfer-key-card"><strong><i class="fas fa-arrow-up result-icon" aria-hidden="true"></i>+31.2%</strong><span>AUROC gain over Caduceus-HG38</span></div>
+            </div>
+
+            <div class="transfer-table-card">
+              <h4>Transfer summary</h4>
+              <div class="table-scroll">
+                <table class="paper-table">
+                  <thead><tr><th>Model</th><th>Accuracy ↑</th><th>AUROC ↑</th><th>Finding</th></tr></thead>
+                  <tbody>
+                    <tr><td>Caduceus (HG38)</td><td>0.449</td><td>0.568</td><td>HG38-pretrained sequence baseline</td></tr>
+                    <tr><td>JanusDNA (HG38)</td><td>0.477</td><td>0.673</td><td>stronger HG38-pretrained baseline</td></tr>
+                    <tr><td>OpticalDNA (HG38)</td>
+                      <td class="best"><span class="score-stack"><span class="score-main">0.595</span><span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+24.7%</span><span class="gain-chip is-subtle">vs. JanusDNA</span></span></td>
+                      <td class="best"><span class="score-stack"><span class="score-main">0.745</span><span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+10.7%</span><span class="gain-chip is-subtle">vs. JanusDNA</span></span></td>
+                      <td><span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+32.5% Acc</span> and <span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+31.2% AUROC</span> vs. Caduceus</td></tr>
+                    <tr><td>OpticalDNA (Rice)</td>
+                      <td class="best"><span class="score-stack"><span class="score-main">0.598</span><span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+25.4%</span><span class="gain-chip is-subtle">vs. JanusDNA</span></span></td>
+                      <td><span class="score-stack"><span class="score-main">0.741</span><span class="gain-chip is-strong"><i class="fas fa-arrow-up" aria-hidden="true"></i>+10.1%</span><span class="gain-chip is-subtle">vs. JanusDNA</span></span></td>
+                      <td><span class="gain-chip is-subtle"><i class="fas fa-arrow-up" aria-hidden="true"></i>+0.5% Acc</span> and <span class="gain-chip is-subtle"><i class="fas fa-arrow-down" aria-hidden="true"></i>−0.5% AUROC</span> vs. OpticalDNA-HG38</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="transfer-takeaway">
+              <strong>Takeaway.</strong> OpticalDNA-HG38 reaches <strong>0.595 / 0.745</strong> on rice, nearly matching the rice-pretrained reference (<strong>0.598 / 0.741</strong>) while delivering large gains over HG38-pretrained sequence baselines.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft-section" id="takeaways">
+      <div class="container is-max-desktop">
+        <div class="section-heading">
+          <div class="section-eyebrow">Takeaways</div>
+          <h2 class="title is-3">What OpticalDNA changes</h2>
+        </div>
+        <div class="highlight-grid">
+          <article class="glass-card"><div class="card-icon"><i class="fas fa-dna"></i></div><h3>A new genomic modeling paradigm</h3><p>Instead of treating DNA as a flat token sequence, OpticalDNA models genomes as coordinate-indexed visual documents.</p></article>
+          <article class="glass-card"><div class="card-icon"><i class="fas fa-bolt"></i></div><h3>Practical long-context scaling</h3><p>Compact visual tokens reduce the effective token count and make ultra-long sequence prediction more efficient.</p></article>
+          <article class="glass-card"><div class="card-icon"><i class="fas fa-search-location"></i></div><h3>Interpretable region access</h3><p>The visual formulation makes genomic regions explicit, supporting localization, retrieval, and evidence inspection.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <div class="bibtex-header">
+          <h2 class="title">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard"><i class="fas fa-copy"></i> <span class="copy-text">Copy</span></button>
+        </div>
+        <pre id="bibtex-code"><code>@inproceedings{xiang2026rethinking,
+  title     = {Rethinking Genomic Modeling Through Optical Character Recognition},
+  author    = {Xiang, Hongxin and Ma, Pengsen and Cao, Yunkang and Yu, Di and Chen, Haowen and Yang, Xinyu and Zeng, Xiangxiang},
+  booktitle = {Proceedings of the 43rd International Conference on Machine Learning},
+  year      = {2026},
+  url       = {https://openreview.net/forum?id=nggzekChuU}
+}
+
+@misc{xiang2026rethinkinggenomicmodelingoptical,
+  title         = {Rethinking Genomic Modeling Through Optical Character Recognition},
+  author        = {Hongxin Xiang and Pengsen Ma and Yunkang Cao and Di Yu and Haowen Chen and Xinyu Yang and Xiangxiang Zeng},
+  year          = {2026},
+  eprint        = {2602.02014},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  url           = {https://arxiv.org/abs/2602.02014}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container is-max-desktop">
+      <div class="content has-text-centered">
+        <p><strong>OpticalDNA</strong> · Hunan University &amp; Yuelushan Laboratory</p>
+        <p>Project page for <em>Rethinking Genomic Modeling Through Optical Character Recognition</em>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function copyBibTeX() {
+      const code = document.getElementById('bibtex-code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const label = document.querySelector('.copy-text');
+        if (label) {
+          const old = label.textContent;
+          label.textContent = 'Copied';
+          setTimeout(() => { label.textContent = old; }, 1600);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
