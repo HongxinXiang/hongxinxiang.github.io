@@ -1,41 +1,614 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="DESCRIPTION META TAG">
-  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
-  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
-  <meta property="og:url" content="URL OF THE WEBSITE"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="static/image/your_banner_image.png" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-
-
-  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
-  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="EDBench is a large-scale electron density dataset and ED-centric benchmark suite for molecular modeling, covering 3.3M+ molecules and prediction, retrieval, and generation tasks.">
+  <meta name="keywords" content="EDBench, electron density, molecular modeling, machine learning force fields, MLFF, DFT, density functional theory, quantum chemistry, NeurIPS 2025, AI4Science">
+  <meta name="author" content="Hongxin Xiang, Ke Li, Mingquan Liu, Zhixiang Cheng, Bin Yao, Wenjie Du, Jun Xia, Li Zeng, Xin Jin, Xiangxiang Zeng">
 
+  <meta property="og:title" content="EDBench: Large-Scale Electron Density Data for Molecular Modeling">
+  <meta property="og:description" content="A 3.3M-molecule electron density dataset and benchmark suite for electronic-level molecular modeling.">
+  <meta property="og:url" content="https://hongxinxiang.github.io/projects/EDBench/">
+  <meta property="og:image" content="static/images/poster-5128x2880.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-  <title>EDBench</title>
+  <meta name="twitter:title" content="EDBench: Large-Scale Electron Density Data for Molecular Modeling">
+  <meta name="twitter:description" content="A 3.3M-molecule electron density dataset and benchmark suite for electronic-level molecular modeling.">
+  <meta name="twitter:image" content="static/images/poster-5128x2880.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <title>EDBench | Large-Scale Electron Density Data</title>
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
+
+  <style>
+    :root {
+      --ed-ink: #0b1220;
+      --ed-muted: #5a6475;
+      --ed-blue: #2f6df6;
+      --ed-cyan: #11c5d9;
+      --ed-green: #37d67a;
+      --ed-violet: #7c3aed;
+      --ed-bg: #f7fbff;
+      --ed-card: rgba(255, 255, 255, 0.82);
+      --ed-border: rgba(61, 108, 214, 0.16);
+      --ed-shadow: 0 24px 70px rgba(17, 35, 79, 0.13);
+      --ed-radius: 26px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      color: var(--ed-ink);
+      font-family: "Google Sans", "Noto Sans", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 8% 4%, rgba(47, 109, 246, 0.18), transparent 26rem),
+        radial-gradient(circle at 92% 8%, rgba(17, 197, 217, 0.18), transparent 24rem),
+        linear-gradient(180deg, #f9fdff 0%, #f3f8ff 42%, #ffffff 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(47, 109, 246, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47, 109, 246, 0.045) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 70%);
+    }
+
+    a { color: #195dde; }
+    a:hover { color: #0e9cc3; }
+
+    ::selection {
+      color: #ffffff;
+      background: rgba(47, 109, 246, .82);
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(17, 197, 217, .55);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    .ed-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: rgba(248, 252, 255, 0.78);
+      border-bottom: 1px solid rgba(47, 109, 246, 0.10);
+    }
+
+    .ed-nav-inner {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .ed-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      color: var(--ed-ink);
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .ed-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--ed-blue), var(--ed-cyan) 58%, var(--ed-green));
+      box-shadow: 0 12px 30px rgba(47, 109, 246, 0.28);
+    }
+
+    .ed-nav-links {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .ed-nav-links a {
+      color: #344054;
+      font-weight: 650;
+      padding: .55rem .78rem;
+      border-radius: 999px;
+      transition: all .2s ease;
+    }
+
+    .ed-nav-links a:hover {
+      color: #0b1220;
+      background: rgba(47, 109, 246, 0.09);
+    }
+
+    .ed-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 4.5rem 1.25rem 2.25rem;
+    }
+
+    .ed-hero::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -170px;
+      top: 20px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg, rgba(47, 109, 246, .14), rgba(17, 197, 217, .24), rgba(55, 214, 122, .18), rgba(124, 58, 237, .12), rgba(47, 109, 246, .14));
+      filter: blur(8px);
+      opacity: .75;
+      z-index: -1;
+    }
+
+    .ed-kicker {
+      display: inline-flex;
+      gap: .55rem;
+      align-items: center;
+      padding: .45rem .78rem;
+      border: 1px solid rgba(47, 109, 246, .18);
+      background: rgba(255, 255, 255, .78);
+      color: #1655ca;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      font-size: .78rem;
+      box-shadow: 0 10px 30px rgba(47, 109, 246, .08);
+    }
+
+    .publication-title.ed-title {
+      display: inline-block;
+      margin: 1.15rem auto 1rem;
+      max-width: 1120px;
+      padding-bottom: .16em;
+      overflow: visible;
+      font-size: clamp(2.7rem, 7vw, 4.85rem) !important;
+      line-height: 1.08;
+      letter-spacing: -.055em;
+      font-weight: 900;
+      text-wrap: balance;
+      background: linear-gradient(110deg, #08111f 0%, #1546b0 42%, #03a7bd 70%, #18a663 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .ed-subtitle {
+      max-width: 900px;
+      margin: 0 auto 1.25rem;
+      color: #435068;
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      line-height: 1.55;
+    }
+
+    .publication-authors {
+      color: #364258;
+      line-height: 1.75;
+    }
+
+    .publication-authors .author-block a {
+      font-weight: 750;
+    }
+
+    .ed-venue {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      margin: .95rem 0 .2rem;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      color: #064e3b;
+      background: linear-gradient(135deg, rgba(55, 214, 122, .17), rgba(17, 197, 217, .12));
+      border: 1px solid rgba(40, 178, 113, .18);
+      font-weight: 850;
+    }
+
+    .publication-links {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .7rem;
+    }
+
+    .publication-links .button {
+      border: 0 !important;
+      color: white !important;
+      font-weight: 800;
+      padding-left: 1.05rem;
+      padding-right: 1.05rem;
+      box-shadow: 0 14px 32px rgba(14, 31, 72, .18);
+      background: linear-gradient(135deg, #151f35, #213154) !important;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .publication-links .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(14, 31, 72, .24);
+      background: linear-gradient(135deg, var(--ed-blue), #09a9c3) !important;
+    }
+
+    .ed-impact {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .ed-stat, .ed-card, .ed-figure-card, .ed-code-card {
+      background: var(--ed-card);
+      border: 1px solid var(--ed-border);
+      border-radius: var(--ed-radius);
+      box-shadow: var(--ed-shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .ed-stat {
+      padding: 1.25rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ed-stat::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: linear-gradient(90deg, var(--ed-blue), var(--ed-cyan), var(--ed-green));
+    }
+
+    .ed-stat strong {
+      display: block;
+      font-size: clamp(1.55rem, 3.2vw, 2.25rem);
+      letter-spacing: -.05em;
+      color: #08111f;
+      line-height: 1.05;
+    }
+
+    .ed-stat span {
+      display: block;
+      margin-top: .45rem;
+      color: var(--ed-muted);
+      font-size: .92rem;
+      font-weight: 650;
+    }
+
+    .section { padding: 4.25rem 1.5rem; }
+    .section-title {
+      margin-bottom: 1rem !important;
+      letter-spacing: -.04em;
+      font-weight: 900;
+      color: #0b1220;
+    }
+
+    .section-eyebrow {
+      color: #1267d8;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .78rem;
+      margin-bottom: .6rem;
+    }
+
+    .section-lead {
+      color: #536074;
+      font-size: 1.1rem;
+      line-height: 1.75;
+      max-width: 850px;
+    }
+
+    .ed-card {
+      padding: clamp(1.3rem, 3vw, 2.35rem);
+    }
+
+    .ed-abstract-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .content p, .ed-card p {
+      color: #344054;
+      line-height: 1.86;
+      font-size: 1.02rem;
+    }
+
+    .ed-bullets {
+      display: grid;
+      gap: .85rem;
+    }
+
+    .ed-bullet {
+      display: flex;
+      gap: .75rem;
+      padding: .95rem;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(47, 109, 246, .08), rgba(17, 197, 217, .07));
+      border: 1px solid rgba(47, 109, 246, .10);
+      color: #344054;
+      font-weight: 650;
+      line-height: 1.55;
+    }
+
+    .ed-bullet .icon {
+      flex: 0 0 32px;
+      width: 32px;
+      height: 32px;
+      display: inline-grid;
+      place-items: center;
+      color: white;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--ed-blue), var(--ed-cyan));
+    }
+
+    .ed-figure-card {
+      padding: .9rem;
+      margin: 1.2rem 0 0;
+      overflow: hidden;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .ed-figure-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(47, 109, 246, .24);
+      box-shadow: 0 30px 80px rgba(17, 35, 79, .16);
+    }
+
+    .ed-figure-card img {
+      display: block;
+      width: 100%;
+      border-radius: 18px;
+      border: 1px solid rgba(15, 23, 42, .08);
+      background: #fff;
+    }
+
+    .ed-caption {
+      margin: .85rem .35rem .25rem;
+      color: #536074;
+      font-size: .96rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .ed-showcase {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+      align-items: start;
+    }
+
+    .ed-task-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .ed-task {
+      padding: 1.2rem;
+      min-height: 100%;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(247,251,255,.88));
+      border: 1px solid rgba(47, 109, 246, .13);
+      box-shadow: 0 18px 44px rgba(17, 35, 79, .09);
+    }
+
+    .ed-task h3 {
+      margin: .75rem 0 .45rem;
+      color: #111827;
+      font-weight: 900;
+      font-size: 1.15rem;
+      letter-spacing: -.02em;
+    }
+
+    .ed-task p {
+      margin: 0;
+      color: #586477;
+      line-height: 1.65;
+      font-size: .97rem;
+    }
+
+    .ed-task-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, var(--ed-blue), var(--ed-violet));
+      box-shadow: 0 14px 30px rgba(47, 109, 246, .23);
+    }
+
+    .ed-dataset-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .ed-dataset-wrap > .ed-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ed-dataset-wrap > .ed-card::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -120px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(17, 197, 217, .18), transparent 68%);
+      pointer-events: none;
+    }
+
+    .ed-dataset-figures {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+      align-items: stretch;
+    }
+
+    .ed-dataset-figures .ed-figure-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    .ed-dataset-figures .ed-figure-card img {
+      flex: 1 1 auto;
+      min-height: 280px;
+      max-height: 420px;
+      object-fit: contain;
+    }
+
+    .ed-process {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .8rem;
+      margin-top: 1.15rem;
+    }
+
+    .ed-process-step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: .9rem;
+      align-items: start;
+      padding: .95rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(47, 109, 246, .10);
+      box-shadow: 0 12px 28px rgba(17, 35, 79, .06);
+    }
+
+    .ed-process-step b {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      color: #1655ca;
+      background: rgba(47, 109, 246, .11);
+      font-size: .95rem;
+    }
+
+    .ed-process-step strong {
+      display: block;
+      color: #111827;
+      margin-bottom: .15rem;
+    }
+
+    .ed-process-step span {
+      color: #536074;
+      line-height: 1.55;
+      font-size: .95rem;
+    }
+
+    .ed-code-card {
+      position: relative;
+      overflow: hidden;
+      padding: 1.1rem;
+    }
+
+    .ed-code-card::before {
+      content: "BibTeX";
+      position: absolute;
+      right: 1rem;
+      top: .75rem;
+      color: rgba(47, 109, 246, .16);
+      font-size: 4rem;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -.08em;
+      pointer-events: none;
+    }
+
+    pre {
+      position: relative;
+      border: 1px solid rgba(47, 109, 246, .12);
+      border-radius: 20px;
+      padding: 1.25rem !important;
+      background: #0d1324 !important;
+      color: #e7eefc !important;
+      overflow-x: auto;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    pre code { color: inherit; font-size: .91rem; }
+
+    .footer {
+      background: #08111f;
+      color: rgba(255,255,255,.72);
+      padding: 3rem 1.5rem;
+    }
+
+    .footer a { color: #92e6ff; }
+
+    .ed-top-link {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 50;
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--ed-blue), var(--ed-cyan));
+      box-shadow: 0 18px 34px rgba(47, 109, 246, .28);
+    }
+
+    @media (max-width: 980px) {
+      .ed-impact, .ed-task-grid, .ed-showcase, .ed-dataset-wrap, .ed-abstract-grid, .ed-dataset-figures, .ed-process {
+        grid-template-columns: 1fr;
+      }
+
+      .ed-dataset-figures .ed-figure-card img {
+        min-height: auto;
+        max-height: none;
+      }
+      .ed-impact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .ed-nav-inner { align-items: flex-start; padding: .8rem 0; flex-direction: column; }
+      .ed-nav-links { justify-content: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .ed-hero { padding-top: 3rem; }
+      .publication-title.ed-title { letter-spacing: -.035em; line-height: 1.12; }
+      .section { padding: 3.1rem 1rem; }
+      .ed-impact { grid-template-columns: 1fr; }
+      .ed-nav-links a { padding: .45rem .55rem; font-size: .92rem; }
+      .publication-links .button { width: 100%; justify-content: center; }
+    }
+  </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
@@ -44,242 +617,197 @@
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
 </head>
-<body>
+<body id="top">
+  <nav class="ed-navbar" aria-label="Primary navigation">
+    <div class="container is-max-widescreen ed-nav-inner">
+      <a class="ed-brand" href="#top" aria-label="EDBench home">
+        <span class="ed-logo"><i class="fas fa-atom" aria-hidden="true"></i></span>
+        <span>EDBench</span>
+      </a>
+      <div class="ed-nav-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#dataset">Dataset</a>
+        <a href="#tasks">Benchmarks</a>
+        <a href="#BibTeX">BibTeX</a>
+      </div>
+    </div>
+  </nav>
 
+  <header class="ed-hero">
+    <div class="container is-max-widescreen">
+      <div class="has-text-centered">
+        <div class="ed-kicker"><i class="fas fa-bolt" aria-hidden="true"></i> NeurIPS 2025 Dataset &amp; Benchmark</div>
+        <h1 class="title is-1 publication-title ed-title">EDBench: Large-Scale Electron Density Data for Molecular Modeling</h1>
+        <p class="ed-subtitle">A high-fidelity electron-density foundation for moving molecular learning from atom-level interactions toward continuous, physically grounded electronic-level modeling.</p>
 
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">EDBench: Large-Scale Electron Density Data for Molecular Modeling</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
-              <span class="author-block">
-<!--                <a href="https://scholar.google.com/citations?user=Wocj2IgAAAAJ&hl=zh-CN&oi=ao" target="_blank">Hongxin Xiang</a><sup>1*</sup>,</span>-->
-                <a href="https://scholar.google.com/citations?user=Wocj2IgAAAAJ&hl=zh-CN&oi=ao" target="_blank">Hongxin Xiang</a><sup>1,5</sup>,</span>
-                <span class="author-block">
-<!--                  Ke Li<sup>2*</sup>,</span>-->
-                  Ke Li<sup>2</sup>,</span>
-                  <span class="author-block">
-                   Mingquan Liu<sup>1</sup>,</span>
-                  <span class="author-block">
-                  Zhixiang Cheng<sup>1</sup>,</span>
-                  <span class="author-block">
-                  Bin Yao<sup>3</sup>,</span>
-                  <span class="author-block">
-                  Wenjie Du<sup>4</sup>,</span>
-                  <span class="author-block">
-                  Jun Xia<sup>5,6</sup>,</span>
-                  <span class="author-block">
-                  Li Zeng<sup>1</sup>,</span>
-                  <span class="author-block">
-                  <a href="http://home.ustc.edu.cn/~jinxustc/" target="_blank">Xin Jin</a><sup>7†</sup>,</span>
-                  <span class="author-block">
-                  <a href="https://scholar.google.com/citations?user=B20HBMIAAAAJ&hl=zh-CN&oi=ao" target="_blank">Xiangxiang Zeng</a><sup>1†</sup>,
-                  </span>
-                  </div>
+        <div class="is-size-5 publication-authors">
+          <span class="author-block"><a href="https://scholar.google.com/citations?user=Wocj2IgAAAAJ&hl=zh-CN&oi=ao" target="_blank" rel="noopener">Hongxin Xiang</a><sup>1,5</sup>,</span>
+          <span class="author-block">Ke Li<sup>2</sup>,</span>
+          <span class="author-block">Mingquan Liu<sup>1</sup>,</span>
+          <span class="author-block">Zhixiang Cheng<sup>1</sup>,</span>
+          <span class="author-block">Bin Yao<sup>3</sup>,</span>
+          <span class="author-block">Wenjie Du<sup>4</sup>,</span>
+          <span class="author-block">Jun Xia<sup>5,6</sup>,</span>
+          <span class="author-block">Li Zeng<sup>1</sup>,</span>
+          <span class="author-block"><a href="http://home.ustc.edu.cn/~jinxustc/" target="_blank" rel="noopener">Xin Jin</a><sup>7†</sup>,</span>
+          <span class="author-block"><a href="https://scholar.google.com/citations?user=B20HBMIAAAAJ&hl=zh-CN&oi=ao" target="_blank" rel="noopener">Xiangxiang Zeng</a><sup>1†</sup></span>
+        </div>
 
-                  <div class="is-size-5 publication-authors">
-                    <span class="author-block"><sup>1</sup>College of Computer Science and Electronic Engineering, Hunan University,&nbsp;<sup>2</sup>College of Life Sciences, East China Normal University,&nbsp;<sup>3</sup>College of Materials Science and Engineering, Hunan University,&nbsp;<sup>4</sup>University of Science and Technology of China,&nbsp;<sup>5</sup>AIMS Lab, The Hong Kong University of Science and Technology (Guangzhou), <sup>6</sup>The Hong Kong University of Science and Technology,&nbsp;<sup>7</sup>Eastern Institute of Technology<br><p class="large-text">NeurIPS 2025; AI4Science@NeurIPS 2025</p></span>
-<!--                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small><sup>†</sup> Correspondence: jinxin@eitech.edu.cn, xzeng@hnu.edu.cn</small></span>-->
-                    <span class="eql-cntrb"><small><br></small><sup>†</sup>Correspondence: <a href=mailto:jinxin@eitech.edu.cn>jinxin@eitech.edu.cn</a>, <a href=mailto:xzeng@hnu.edu.cn>xzeng@hnu.edu.cn</a></small></span>
-                  </div>
+        <div class="publication-authors mt-3">
+          <span class="author-block"><sup>1</sup>College of Computer Science and Electronic Engineering, Hunan University;&nbsp;</span>
+          <span class="author-block"><sup>2</sup>College of Life Sciences, East China Normal University;&nbsp;</span>
+          <span class="author-block"><sup>3</sup>College of Materials Science and Engineering, Hunan University;&nbsp;</span>
+          <span class="author-block"><sup>4</sup>University of Science and Technology of China;&nbsp;</span>
+          <span class="author-block"><sup>5</sup>AIMS Lab, The Hong Kong University of Science and Technology (Guangzhou);&nbsp;</span>
+          <span class="author-block"><sup>6</sup>The Hong Kong University of Science and Technology;&nbsp;</span>
+          <span class="author-block"><sup>7</sup>Eastern Institute of Technology</span>
+          <br>
+          <span class="ed-venue"><i class="fas fa-award" aria-hidden="true"></i> NeurIPS 2025; AI4Science@NeurIPS 2025</span>
+          <br>
+          <span class="eql-cntrb"><sup>†</sup>Correspondence: <a href="mailto:jinxin@eitech.edu.cn">jinxin@eitech.edu.cn</a>, <a href="mailto:xzeng@hnu.edu.cn">xzeng@hnu.edu.cn</a></span>
+        </div>
 
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- Arxiv PDF link -->
-                      <span class="link-block">
-<!--                        <a href="https://arxiv.org/pdf/2505.09262.pdf" target="_blank"-->
-<!--                           class="external-link button is-normal is-rounded is-dark">-->
-                        <a href="https://openreview.net/pdf?id=pAd7qVrYPG" target="_blank"
-                           class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                        </a>
-                      </span>
+        <div class="publication-links">
+          <span class="link-block"><a href="https://openreview.net/pdf?id=pAd7qVrYPG" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span></a></span>
+          <span class="link-block"><a href="https://openreview.net/forum?id=pAd7qVrYPG" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-file"></i></span><span>OpenReview</span></a></span>
+          <span class="link-block"><a href="https://dataverse.harvard.edu/dataverse/EDBench" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-database"></i></span><span>Data Access</span></a></span>
+          <span class="link-block"><a href="https://github.com/HongxinXiang/EDBench" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a></span>
+          <span class="link-block"><a href="http://arxiv.org/abs/2505.09262" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a></span>
+        </div>
 
-                        <!-- OpenReview -->
-                      <span class="link-block">
-                        <a href="https://openreview.net/forum?id=pAd7qVrYPG" target="_blank"
-                           class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file"></i>
-                        </span>
-                        <span>OpenReview</span>
-                        </a>
-                      </span>
+        <div class="ed-impact" aria-label="EDBench highlights">
+          <div class="ed-stat"><strong>3.36M</strong><span>molecules with ED</span></div>
+          <div class="ed-stat"><strong>205K+</strong><span>DFT core-hours</span></div>
+          <div class="ed-stat"><strong>6</strong><span>ED-centric benchmarks</span></div>
+          <div class="ed-stat"><strong>3</strong><span>task families</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
 
+  <main>
+    <section class="section" id="poster">
+      <div class="container is-max-widescreen">
+        <div class="ed-figure-card">
+          <img src="static/images/poster-5128x2880.png" alt="EDBench poster overview">
+          <p class="ed-caption"><strong>Poster.</strong> A visual overview of the EDBench dataset, benchmark tasks, and electronic-level molecular modeling motivation.</p>
+        </div>
+      </div>
+    </section>
 
-                    <!-- Data Access -->
-                    <span class="link-block">
-                      <a href="https://dataverse.harvard.edu/dataverse/EDBench" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"> 
-			<i class="fas fa-database"></i>
-                      </span>
-                      <span>Data Access</span>
-                    </a>
-                  </span>
-
-                  <!-- Github link -->
-                  <span class="link-block">
-                    <a href="https://github.com/HongxinXiang/EDBench" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-
-                <!-- ArXiv abstract Link -->
-                <span class="link-block">
-                  <a href="http://arxiv.org/abs/2505.09262" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
+    <section class="section" id="overview">
+      <div class="container is-max-widescreen">
+        <div class="columns is-variable is-6 is-vcentered">
+          <div class="column is-5">
+            <p class="section-eyebrow">Core idea</p>
+            <h2 class="title is-2 section-title">From atoms to electrons.</h2>
+            <p class="section-lead">EDBench reframes molecular learning around electron density ρ(r), a dense and continuous signal that directly reflects the spatial distribution of electrons and provides richer supervision for quantum-aware modeling.</p>
+          </div>
+          <div class="column is-7">
+            <div class="ed-figure-card mt-0">
+              <img src="static/images/Intro.png" alt="EDBench motivation and dataset workflow">
+              <p class="ed-caption"><strong>Figure 1.</strong> EDBench advances MLFFs from discrete atomistic representations to continuous electron-density modeling; summarizes the dataset workflow; and positions the DFT method selection along Jacob's ladder.</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
+    <section class="section" id="abstract">
+      <div class="container is-max-widescreen">
+        <div class="ed-abstract-grid">
+          <article class="ed-card content">
+            <p class="section-eyebrow">Abstract</p>
+            <h2 class="title is-2 section-title">A large-scale benchmark for electronic-level molecular understanding.</h2>
+            <p>Existing molecular machine learning force fields (MLFFs) generally focus on atoms, molecules, and simple quantum chemical properties such as energy and force, but overlook the importance of electron density (ED) ρ(r) for accurately understanding molecular force fields. ED describes the probability of finding electrons at specific locations around atoms or molecules, and according to the Hohenberg-Kohn theorem, it uniquely determines all ground-state properties of interactive multi-particle systems.</p>
+            <p>EDBench introduces a large-scale, high-quality ED dataset built upon PCQM4Mv2, covering 3.3 million molecules. It also provides an ED-centric benchmark suite spanning prediction, retrieval, and generation. The results show that learning from EDBench is feasible, accurate, and can substantially reduce computational cost compared with traditional DFT calculations, laying a foundation for ED-driven drug discovery and materials science.</p>
+          </article>
 
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-      <div class="hero-body">
-          <!-- Your image here -->
-          <img src="static/images/poster-5128x2880.png"
-               alt="Introduction of EDBench"/>
-          <h2 class="subtitle has-text-centered">
-              Poster
-          </h2>
-      </div>
-  </div>
-</section>
-
-
-<!-- Image-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-              <!-- Your image here -->
-        <img src="static/images/Intro.png"
-        alt="Introduction of EDBench"/>
-      <h2 class="subtitle has-text-centered">
-        Figure1: (a) Advancing MLFFs from atomic-level interactions—based on discrete atomistic representations—to electronic-level modeling using continuous ED, enabling richer and more physically grounded supervision; (b) Overview of the proposed EDBench dataset; (c) DFT method selection guided by Jacob's ladder to balance accuracy and computational cost.
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End Image -->
-
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Existing molecular machine learning force fields (MLFFs) generally focus on the learning of atoms, molecules, and simple quantum chemical properties (such as energy and force), but ignore the importance of electron density (ED) ρ(r) in accurately understanding molecular force fields (MFFs). ED describes the probability of finding electrons at specific locations around atoms or molecules, which uniquely determines all ground state properties (such as energy, molecular structure, etc.) of interactive multi-particle systems according to the Hohenberg-Kohn theorem. However, the calculation of ED relies on the time-consuming first-principles density functional theory (DFT), which leads to the lack of large-scale ED data and limits its application in MLFFs.<br>In this paper, we introduce EDBench, a large-scale, high-quality dataset of ED designed to advance learning-based research at the electronic scale. Built upon the PCQM4Mv2, EDBench provides accurate ED data, covering 3.3 million molecules. To comprehensively evaluate the ability of models to understand and utilize electronic information, we design a suite of ED-centric benchmark tasks spanning prediction, retrieval, and generation. Our evaluation of several state-of-the-art methods demonstrates that learning from EDBench is not only feasible but also achieves high accuracy. Moreover, we show that learning-based methods can efficiently calculate ED with comparable precision while significantly reducing the computational cost relative to traditional DFT calculations. All data and benchmarks from EDBench will be freely available, laying a robust foundation for ED-driven drug discovery and materials science.
-          </p>
+          <aside class="ed-card">
+            <p class="section-eyebrow">What EDBench contributes</p>
+            <div class="ed-bullets">
+              <div class="ed-bullet"><span class="icon"><i class="fas fa-layer-group"></i></span><span><strong>Scale:</strong> electron density for 3,359,472 drug-like molecules.</span></div>
+              <div class="ed-bullet"><span class="icon"><i class="fas fa-microscope"></i></span><span><strong>Fidelity:</strong> B3LYP with 6-31G** / 6-31+G** basis choices for high-quality DFT computation.</span></div>
+              <div class="ed-bullet"><span class="icon"><i class="fas fa-random"></i></span><span><strong>Benchmarks:</strong> prediction, MS-ED retrieval, and ED generation tasks.</span></div>
+              <div class="ed-bullet"><span class="icon"><i class="fas fa-rocket"></i></span><span><strong>Acceleration:</strong> learning-based ED generation as a scalable alternative to repeated DFT runs.</span></div>
+            </div>
+          </aside>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
+    </section>
 
+    <section class="section" id="dataset">
+      <div class="container is-max-widescreen">
+        <div class="ed-dataset-wrap">
+          <article class="ed-card content">
+            <p class="section-eyebrow">Dataset construction</p>
+            <h2 class="title is-2 section-title">3.36 million molecules, computed at serious scale.</h2>
+            <p>We performed large-scale density functional theory (DFT) calculations on 3,359,472 molecules from the PCQM4Mv2 dataset using Psi4 1.7. The B3LYP hybrid functional was selected for strong empirical performance across diverse molecular systems. Closed-shell systems use an RHF reference, while open-shell systems use a UHF reference to allow independent optimization of alpha and beta spin orbitals.</p>
+            <p>Basis sets are assigned by elemental composition: 6-31G** for molecules without sulfur, and 6-31+G** for sulfur-containing molecules to better capture delocalized and polarizable electron distributions. After SCF convergence, cube files are generated with a 0.4 Bohr grid spacing, 4.0 Bohr padding, and 0.85 density fraction threshold.</p>
+            <div class="ed-process">
+              <div class="ed-process-step"><b>01</b><span><strong>PCQM4Mv2 source molecules</strong> Drug-like chemical space for large-scale ED generation.</span></div>
+              <div class="ed-process-step"><b>02</b><span><strong>DFT / SCF pipeline</strong> B3LYP + tailored basis sets with RHF/UHF references.</span></div>
+              <div class="ed-process-step"><b>03</b><span><strong>CUBE electron density output</strong> Dense continuous ED fields plus quantum chemical properties.</span></div>
+            </div>
+          </article>
 
-<!-- Image-->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3">EDBench Dataset</h2>
-	<p>We performed large-scale density functional theory (DFT) calculations on 3,359,472 molecules from the PCQM4Mv2 dataset using Psi4 1.7 . We employed the widely used B3LYP hybrid functional due to its strong empirical performance across diverse molecular systems. The choice of reference wavefunction was determined by the spin multiplicity, which was computed from the number of unpaired electrons according to Hund’s rule. Specifically, we used a restricted Hartree-Fock (RHF) reference for closed-shell systems (multiplicity = 1), and an unrestricted Hartree-Fock (UHF) reference for open-shell systems (multiplicity > 1) to allow for independent optimization of ε and ϑ spin orbitals. Basis sets were assigned based on elemental composition. We used 6-31G** for molecules without sulfur, while for sulfur-containing molecules, we used 6-31+G** to incorporate diffuse functions that better capture the more delocalized and polarizable electron distributions of heavier atoms like sulfur. After achieving self-consistent field (SCF) convergence, we generated cube files containing electron density (ED) data from Equation 1 with a grid spacing of 0.4 Bohr, a padding of 4.0 Bohr, and a density fraction threshold of 0.85 to define the isosurface region. All computations were carried out on a high-performance server equipped with 8 Intel(R) Xeon(R) Platinum 8270 CPUs, each with 26 physical cores and 2 threads per core, yielding a total of 416 logical cores. The total computational cost exceeded 205,000 core-hours, equivalent to approximately 23.4 years of single-core compute time.</p><br><br>
-              <!-- Your image here -->
-        <img src="static/images/EDBench_statistical.png"
-        alt="Statistical information"/>
-      <h2 class="subtitle has-text-centered">
-        Figure 2: (a) Distribution of molecular lengths (heavy atoms only) in EDBench. (b) Distribution of heavy atom counts. (c) Distribution of ED vector lengths. (d) Distribution of per-molecule mean ED values. 
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End Image -->
+          <div class="ed-dataset-figures">
+            <div class="ed-figure-card">
+              <img src="static/images/EDBench_statistical.png" alt="Statistical information of EDBench">
+              <p class="ed-caption"><strong>Figure 2.</strong> Distributions of molecular lengths, heavy atom counts, ED vector lengths, and per-molecule mean ED values.</p>
+            </div>
+            <div class="ed-figure-card">
+              <img src="static/images/ED_thresh_example.png" alt="Electron density visualization at different thresholds">
+              <p class="ed-caption"><strong>Figure 3.</strong> Electron density visualization of a molecule under different thresholds, showing how density filtering changes the point distribution.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- Image-->
-<section class="hero is-small">
-  
-    <div class="container is-max-desktop">
-	<div class="hero-body">
-              <!-- Your image here -->
-        <img src="static/images/ED_thresh_example.png"
-        alt="Example of ED visualization"/>
-      <h2 class="subtitle has-text-centered">
-        Figure 3: Example of ED visualization of a molecule with different thresholds ωϱ . Point represents
-the number of ED points. 
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End Image -->
+    <section class="section" id="comparison">
+      <div class="container is-max-widescreen">
+        <div class="ed-card">
+          <p class="section-eyebrow">Positioning</p>
+          <h2 class="title is-2 section-title">The largest known ED benchmark dataset in quantum chemistry.</h2>
+          <p class="section-lead">Compared with classical quantum chemistry, molecular dynamics, pharmaceutical, and materials datasets, EDBench is designed to combine large-scale coverage with directly available electron density and comprehensive benchmark labels.</p>
+          <div class="ed-figure-card">
+            <img src="static/images/Table1.png" alt="Comparison of quantum chemistry databases">
+            <p class="ed-caption"><strong>Table 1.</strong> Comparison of quantum chemistry databases. EDBench provides ED in CUBE format along with quantum chemical properties at unprecedented molecular scale.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- Table-->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-              <!-- Your Table here -->
-        <img src="static/images/Table1.png">
-      <h2 class="subtitle has-text-centered">
-        Table 1: Comparison of various databases in quantum chemistry. Compared with other datasets, EDBench provides the largest known ED benchmark dataset, characterized by its large scale and comprehensive content.
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End Image -->
+    <section class="section" id="tasks">
+      <div class="container is-max-widescreen">
+        <div class="ed-card">
+          <p class="section-eyebrow">Benchmarks</p>
+          <h2 class="title is-2 section-title">Six ED-centric tasks across prediction, retrieval, and generation.</h2>
+          <p class="section-lead">EDBench tests whether models can understand and use electronic information, not merely atom-level molecular graphs. The suite covers quantum property prediction, cross-modal retrieval between molecular structures and ED, and ED prediction from molecular structures.</p>
 
+          <div class="ed-task-grid">
+            <div class="ed-task"><div class="ed-task-icon"><i class="fas fa-chart-line"></i></div><h3>Quantum property prediction</h3><p>ED5-EC, ED5-OE, ED5-MM, and ED5-OCS evaluate whether ED alone can infer energy components, orbital energies, multipole moments, and open-/closed-shell states.</p></div>
+            <div class="ed-task"><div class="ed-task-icon"><i class="fas fa-exchange-alt"></i></div><h3>MS ↔ ED retrieval</h3><p>ED5-MER probes representational alignment between molecular structures and electron-density fields for virtual screening and electron-aware representation learning.</p></div>
+            <div class="ed-task"><div class="ed-task-icon"><i class="fas fa-magic"></i></div><h3>ED generation</h3><p>ED5-EDP predicts DFT-level electron density from molecular structures, enabling scalable quantum-aware modeling at far lower computational cost.</p></div>
+          </div>
 
+          <div class="ed-figure-card">
+            <img src="static/images/6benchmarks.jpg" alt="Statistical information for six EDBench benchmark tasks">
+            <p class="ed-caption"><strong>Table 2.</strong> Statistical information of the six benchmark datasets with scaffold split.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-
-<!-- Table-->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3">Tasks based on both molecular structures (MS) and ED</h2>
-	<p>To enable rigorous benchmarking and model development, we further design an ED-centric benchmark suite covering three task categories: (i) quantum property prediction, including four core tasks—energy components prediction (ED5-EC), orbital energe estimation (ED5-OE), multipole moment regression (ED5-MM), and open-/closed-shell classification (ED5-OCS)—to evaluate how well ED alone can serve as a sufficient descriptor for inferring fundamental quantum properties; (ii) cross-modal retrieval between molecular structures and ED (ED5-MER), designed to probe the mutual consistency and representational alignment between structural and density spaces, which is critical for density-based force field construction and virtual screening; and (iii) ED prediction from molecular structures (ED5-EDP), aimed at approximating DFT-level density fields at significantly reduced computational cost, thereby enabling scalable quantum-aware modeling. Finally, we evaluate several state-of-the-art deep learning models on the proposed benchmark, offering the first large-scale assessment of ED understanding in data-driven systems.</p><br>
-              <!-- Your Table here -->
-        <img src="static/images/6benchmarks.jpg">
-      <h2 class="subtitle has-text-centered">
-        Table 2: Statistical information of designed 6 benchmarks with a scaffold split.
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End Image -->
-
-
-
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>@inproceedings{xiang2025edbench,
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <p class="section-eyebrow">Citation</p>
+        <h2 class="title is-2 section-title">BibTeX</h2>
+        <div class="ed-code-card">
+<pre><code>@inproceedings{xiang2025edbench,
   title         = {EDBench: Large-Scale Electron Density Data for Molecular Modeling},
-  author        = {Hongxin xiang and Ke Li and Mingquan Liu and Zhixiang Cheng and Bin Yao and Wenjie Du and Jun Xia and Li Zeng and Xin Jin and Xiangxiang Zeng},
+  author        = {Hongxin Xiang and Ke Li and Mingquan Liu and Zhixiang Cheng and Bin Yao and Wenjie Du and Jun Xia and Li Zeng and Xin Jin and Xiangxiang Zeng},
   booktitle     = {The Thirty-ninth Annual Conference on Neural Information Processing Systems Datasets and Benchmarks Track},
   year          = {2025},
   url           = {https://openreview.net/forum?id=pAd7qVrYPG}
@@ -293,35 +821,20 @@ the number of ED points.
   archivePrefix = {arXiv},
   primaryClass  = {physics.chem-ph},
   url           = {https://arxiv.org/abs/2505.09262}
-}
-</code></pre>
-    </div>
-</section>
-<!--End BibTex citation -->
-
-
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            Thanks for the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> from <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-           
-          </p>
-
+}</code></pre>
         </div>
       </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container is-max-desktop">
+      <div class="content has-text-centered">
+        <p>Built for the EDBench project page. Thanks for the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a> from the <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> project page.</p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+  <a href="#top" class="ed-top-link" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
+</body>
+</html>
