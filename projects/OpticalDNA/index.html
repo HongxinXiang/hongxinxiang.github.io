@@ -196,13 +196,63 @@
 
     .bibtex-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
     pre { border-radius: 1rem; border: 1px solid var(--line); background: #0f172a; color: #e2e8f0; padding: 1.2rem; overflow-x: auto; }
-    .copy-bibtex-btn { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: .55rem .9rem; font-weight: 700; cursor: pointer; }
-    .copy-bibtex-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .copy-bibtex-btn { display: inline-flex; align-items: center; gap: .45rem; border: 0; background: var(--primary); color: #fff; border-radius: 999px; padding: .62rem 1rem; font-weight: 850; cursor: pointer; box-shadow: 0 10px 24px rgba(37, 99, 235, .24); transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
+    .copy-bibtex-btn:hover { background: var(--primary-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 14px 30px rgba(37, 99, 235, .30); }
+    .copy-bibtex-btn:focus-visible { outline: 3px solid rgba(37, 99, 235, .28); outline-offset: 3px; }
+    .copy-bibtex-btn:active { transform: translateY(0); box-shadow: 0 8px 18px rgba(37, 99, 235, .22); }
     .footer { background: #0f172a; color: #cbd5e1; }
     .footer a { color: #bfdbfe; }
     .scroll-to-top { position: fixed; right: 1rem; bottom: 1rem; width: 2.75rem; height: 2.75rem; border-radius: 999px; border: 0; background: var(--primary); color: #fff; box-shadow: var(--shadow); z-index: 40; cursor: pointer; }
     @media (max-width: 900px) { .transfer-key-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .transfer-insight { grid-template-columns: 1fr; } .hero-stats, .highlight-grid, .metric-grid, .method-flow, .mini-metrics, .figure-grid { grid-template-columns: 1fr 1fr; } .tasks-grid { grid-template-columns: repeat(2, 1fr); } .flow-step:not(:last-child)::after { display: none; } }
-    @media (max-width: 640px) { .transfer-key-grid, .transfer-insight-side { grid-template-columns: 1fr; } .transfer-highlight-grid { grid-template-columns: 1fr; } .section { padding: 3rem 1rem; } .publication-title { font-size: 2.15rem !important; } .hero-stats, .highlight-grid, .metric-grid, .method-flow, .tasks-grid, .mini-metrics, .figure-grid { grid-template-columns: 1fr; } .bibtex-header { align-items: flex-start; flex-direction: column; } }
+    @media (max-width: 640px) { .transfer-key-grid, .transfer-insight-side { grid-template-columns: 1fr; } .transfer-highlight-grid { grid-template-columns: 1fr; } .section { padding: 3rem 1rem; } .publication-title { font-size: 2.15rem !important; } .conference-card { align-items: stretch; flex-direction: column; text-align: center; } .conference-logo-link { width: 100%; } .hero-stats, .highlight-grid, .metric-grid, .method-flow, .tasks-grid, .mini-metrics, .figure-grid { grid-template-columns: 1fr; } .bibtex-header { align-items: flex-start; flex-direction: column; } }
+
+
+    /* ICML 2026 venue card */
+    .conference-card { display: flex; align-items: center; gap: 1rem; max-width: 780px; margin: 1.35rem auto 0; padding: .95rem 1rem; border-radius: 1.25rem; border: 1px solid rgba(37, 99, 235, .16); background: rgba(255, 255, 255, .84); box-shadow: 0 14px 38px rgba(15, 23, 42, .10); backdrop-filter: blur(12px); text-align: left; }
+    .conference-logo-link { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 11rem; min-height: 4.1rem; padding: .45rem .7rem; border-radius: 1rem; background: #fff; border: 1px solid rgba(226, 232, 240, .95); box-shadow: 0 8px 22px rgba(15, 23, 42, .06); }
+    .conference-logo { display: block; width: 100%; max-height: 3.2rem; object-fit: contain; }
+    .conference-meta { display: grid; gap: .16rem; min-width: 0; }
+    .conference-label { color: var(--primary); font-size: .78rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .conference-meta strong { color: #0f172a; font-size: 1.02rem; line-height: 1.35; font-weight: 900; letter-spacing: -.02em; }
+    .conference-meta span:not(.conference-label) { color: var(--muted); font-size: .92rem; line-height: 1.45; }
+    .conference-meta a { font-weight: 800; }
+    @media (max-width: 640px) { .conference-card { align-items: stretch; flex-direction: column; text-align: center; } .conference-logo-link { width: 100%; } }
+
+
+    /* Embedded conference poster showcase */
+    .poster-showcase { position: relative; overflow: hidden; background: radial-gradient(circle at 16% 10%, rgba(37, 99, 235, .14), transparent 34%), radial-gradient(circle at 84% 18%, rgba(6, 182, 212, .13), transparent 32%), linear-gradient(180deg, #ffffff 0%, #f3f8ff 100%); }
+    .poster-showcase::before { content: "POSTER"; position: absolute; right: -1rem; top: 1.2rem; font-size: clamp(4rem, 12vw, 12rem); line-height: 1; font-weight: 900; letter-spacing: -.08em; color: rgba(37, 99, 235, .055); pointer-events: none; }
+    .poster-showcase .container { position: relative; z-index: 1; }
+    .poster-shell { display: block; }
+    .poster-card, .poster-pdf-panel, .poster-lightbox-inner { background: rgba(255, 255, 255, .92); border: 1px solid rgba(226, 232, 240, .96); border-radius: 1.5rem; box-shadow: 0 24px 70px rgba(15, 23, 42, .14); backdrop-filter: blur(12px); }
+    .poster-card { padding: 1rem; }
+    .poster-toolbar { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; justify-content: space-between; margin-bottom: .9rem; }
+    .poster-toolbar-title { display: inline-flex; align-items: center; gap: .5rem; font-weight: 900; color: #1e293b; letter-spacing: -.02em; }
+    .poster-actions { display: flex; flex-wrap: wrap; gap: .55rem; }
+    .poster-action { display: inline-flex; align-items: center; gap: .45rem; border-radius: 999px; padding: .62rem .9rem; border: 1px solid rgba(37, 99, 235, .16); background: rgba(37, 99, 235, .08); color: var(--primary-dark); font-weight: 850; font-size: .88rem; transition: transform .18s ease, box-shadow .18s ease, background .18s ease; cursor: pointer; }
+    .poster-action:hover { transform: translateY(-2px); background: rgba(37, 99, 235, .13); color: var(--primary-dark); box-shadow: 0 12px 26px rgba(37, 99, 235, .14); }
+    .poster-action.is-solid { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .poster-action.is-solid:hover { background: var(--primary-dark); color: #fff; }
+    .poster-frame { position: relative; border-radius: 1.15rem; padding: .6rem; background: linear-gradient(135deg, rgba(37, 99, 235, .16), rgba(6, 182, 212, .12)); border: 1px solid rgba(37, 99, 235, .14); }
+    .poster-zoom-btn { display: block; width: 100%; padding: 0; border: 0; border-radius: .95rem; overflow: hidden; background: #fff; cursor: zoom-in; box-shadow: inset 0 0 0 1px rgba(226, 232, 240, .95); }
+    .poster-img { display: block; width: 100%; height: auto; border-radius: .95rem; background: #fff; }
+    .poster-note { margin-top: .72rem; color: var(--muted); font-size: .92rem; line-height: 1.55; text-align: center; }
+    .poster-pdf-panel { margin-top: 1.2rem; padding: 0; overflow: hidden; }
+    .poster-pdf-panel summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.15rem; cursor: pointer; font-weight: 900; color: #1e293b; list-style: none; }
+    .poster-pdf-panel summary::-webkit-details-marker { display: none; }
+    .poster-pdf-panel summary::after { content: "+"; display: inline-flex; align-items: center; justify-content: center; width: 1.8rem; height: 1.8rem; border-radius: 999px; background: rgba(37, 99, 235, .10); color: var(--primary-dark); font-weight: 900; }
+    .poster-pdf-panel[open] summary::after { content: "-"; }
+    .poster-pdf-body { border-top: 1px solid var(--line); padding: 1rem; }
+    .poster-pdf-viewer { width: 100%; height: min(78vh, 920px); border: 1px solid var(--line); border-radius: 1rem; background: #f8fafc; }
+    #poster-lightbox { width: min(96vw, 1480px); max-width: 96vw; border: 0; padding: 0; background: transparent; }
+    #poster-lightbox::backdrop { background: rgba(15, 23, 42, .76); backdrop-filter: blur(4px); }
+    .poster-lightbox-inner { padding: .95rem; }
+    .poster-lightbox-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: .75rem; color: #1e293b; font-weight: 900; }
+    .poster-close { border: 0; border-radius: 999px; background: #0f172a; color: #fff; padding: .5rem .8rem; font-weight: 850; cursor: pointer; }
+    .poster-lightbox-img { display: block; width: 100%; height: auto; max-height: 84vh; object-fit: contain; border-radius: 1rem; background: #fff; }
+    @media (max-width: 960px) { .poster-shell { display: block; } }
+    @media (max-width: 640px) { .poster-card { padding: .72rem; } .poster-toolbar { align-items: flex-start; flex-direction: column; } .poster-actions { width: 100%; } .poster-action { flex: 1 1 auto; justify-content: center; } .poster-pdf-viewer { height: 68vh; } }
+
   </style>
 
   <script type="application/ld+json">
@@ -301,9 +351,20 @@
     <section class="hero hero-odna">
       <div class="hero-body">
         <div class="container is-max-desktop has-text-centered">
-          <div class="venue-pill"><i class="fas fa-award"></i><span>ICML 2026</span></div>
+          <div class="venue-pill"><i class="fas fa-award"></i><span>ICML 2026 · Seoul, South Korea</span></div>
           <h1 class="title is-1 publication-title title-gradient">Rethinking Genomic Modeling Through Optical Character Recognition</h1>
           <p class="hero-subtitle">OpticalDNA turns DNA sequences into structured visual documents and learns OCR-style genomic reasoning, enabling compact, reconstructible visual compression for ultra-long genomic contexts.</p>
+
+          <div class="conference-card" aria-label="ICML 2026 venue information">
+            <a class="conference-logo-link" href="https://icml.cc" target="_blank" rel="noopener" aria-label="Open the official ICML 2026 website">
+              <img class="conference-logo" src="https://icml.cc/static/core/img/ICML-logo.svg" alt="ICML official logo" loading="lazy" referrerpolicy="no-referrer">
+            </a>
+            <div class="conference-meta">
+              <span class="conference-label">Conference venue</span>
+              <strong>COEX Convention &amp; Exhibition Center · Seoul, South Korea</strong>
+              <span>July 6–11, 2026 · <a href="https://icml.cc" target="_blank" rel="noopener">Official ICML 2026 site</a></span>
+            </div>
+          </div>
 
           <div class="is-size-5 publication-authors mt-4">
             <span class="author-block"><a href="https://hongxinxiang.github.io" target="_blank" rel="noopener">Hongxin Xiang</a><sup>*</sup>,</span>
@@ -322,6 +383,7 @@
           <div class="publication-links">
             <span class="link-block"><a href="https://openreview.net/forum?id=nggzekChuU" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-comments"></i></span><span>OpenReview</span></a></span>
             <span class="link-block"><a href="https://arxiv.org/pdf/2602.02014" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-primary-soft"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span></a></span>
+            <span class="link-block"><a href="#poster" class="external-link button is-normal is-rounded is-primary-soft"><span class="icon"><i class="fas fa-chalkboard"></i></span><span>Poster</span></a></span>
             <span class="link-block"><a href="https://github.com/HongxinXiang/OpticalDNA" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a></span>
             <span class="link-block"><a href="https://arxiv.org/abs/2602.02014" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a></span>
             <span class="link-block"><a href="#BibTeX" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-quote-right"></i></span><span>BibTeX</span></a></span>
@@ -336,6 +398,55 @@
         </div>
       </div>
     </section>
+
+
+
+    <section class="section poster-showcase" id="poster">
+      <div class="container is-max-widescreen">
+        <div class="section-heading poster-heading">
+          <div class="section-eyebrow">Conference poster</div>
+          <h2 class="title is-3">ICML 2026 Poster</h2>
+        </div>
+
+        <div class="poster-shell">
+          <div class="poster-card">
+            <div class="poster-toolbar">
+              <div class="poster-toolbar-title"><i class="fas fa-chalkboard"></i><span>OpticalDNA Poster</span></div>
+              <div class="poster-actions">
+                <button class="poster-action is-solid" type="button" onclick="openPosterPreview()"><i class="fas fa-search-plus"></i><span>Zoom poster</span></button>
+                <a class="poster-action" id="poster-image-link" href="./static/poster/poster.webp" target="_blank" rel="noopener"><i class="fas fa-image"></i><span>Open image</span></a>
+                <a class="poster-action" data-poster-pdf href="./static/poster/poster.pdf" target="_blank" rel="noopener" download="poster.pdf"><i class="fas fa-file-pdf"></i><span>Download PDF</span></a>
+              </div>
+            </div>
+            <div class="poster-frame">
+              <button class="poster-zoom-btn" type="button" onclick="openPosterPreview()" aria-label="Open full-size OpticalDNA poster preview">
+                <img id="poster-img" class="poster-img" src="./static/poster/poster.webp" alt="ICML 2026 OpticalDNA poster: Rethinking Genomic Modeling Through Optical Character Recognition" loading="eager">
+              </button>
+            </div>
+            <p class="poster-note">Click the poster to inspect it at a larger size. The preview is embedded in this HTML file, so it remains visible even without a separate image asset.</p>
+          </div>
+        </div>
+
+        <details class="poster-pdf-panel">
+          <summary><span><i class="fas fa-file-pdf"></i> View the original poster PDF inside this page</span></summary>
+          <div class="poster-pdf-body">
+            <object id="poster-pdf-viewer" class="poster-pdf-viewer" type="application/pdf" aria-label="Embedded OpticalDNA poster PDF">
+              <p>Your browser cannot display the embedded PDF. Use the Download PDF button above to open it.</p>
+            </object>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <dialog id="poster-lightbox" aria-label="Large OpticalDNA poster preview">
+      <div class="poster-lightbox-inner">
+        <div class="poster-lightbox-toolbar">
+          <span><i class="fas fa-chalkboard"></i> OpticalDNA Poster Preview</span>
+          <button class="poster-close" type="button" onclick="closePosterPreview()"><i class="fas fa-times"></i> Close</button>
+        </div>
+        <img class="poster-lightbox-img" src="./static/poster/poster.webp" alt="Large preview of the ICML 2026 OpticalDNA poster">
+      </div>
+    </dialog>
 
     <section class="section">
       <div class="container is-max-desktop">
@@ -623,5 +734,46 @@
       });
     }
   </script>
+  <script>
+    (function () {
+      const posterPdfPath = './static/poster/poster.pdf';
+
+      function initPosterAssets() {
+        const posterImage = document.getElementById('poster-img');
+        const posterImageLink = document.getElementById('poster-image-link');
+        if (posterImage && posterImageLink) posterImageLink.href = './static/poster/poster.webp';
+
+        document.querySelectorAll('[data-poster-pdf]').forEach((link) => {
+          link.href = posterPdfPath;
+          link.download = 'poster.pdf';
+        });
+
+        const viewer = document.getElementById('poster-pdf-viewer');
+        const panel = document.querySelector('.poster-pdf-panel');
+        if (viewer && panel) {
+          const assignPdf = () => { if (!viewer.data) viewer.data = posterPdfPath; };
+          panel.addEventListener('toggle', () => { if (panel.open) assignPdf(); });
+          if (panel.open) assignPdf();
+        }
+      }
+
+      window.openPosterPreview = function () {
+        const dialog = document.getElementById('poster-lightbox');
+        if (!dialog) return;
+        if (typeof dialog.showModal === 'function') dialog.showModal();
+        else dialog.setAttribute('open', 'open');
+      };
+
+      window.closePosterPreview = function () {
+        const dialog = document.getElementById('poster-lightbox');
+        if (!dialog) return;
+        if (typeof dialog.close === 'function') dialog.close();
+        else dialog.removeAttribute('open');
+      };
+
+      document.addEventListener('DOMContentLoaded', initPosterAssets);
+    })();
+  </script>
+
 </body>
 </html>
